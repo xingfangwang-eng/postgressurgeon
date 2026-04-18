@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postgres Surgeon - Diagnostic Center</title>
+    <meta name="description" content="Postgres Surgeon Diagnostic Center - Comprehensive database performance optimization guides">
+    <style>
+        /* 基础样式 */
+        body {
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* 字体样式 */
+        .swiss-font {
+            font-weight: bold;
+            letter-spacing: -0.02em;
+        }
+        
+        /* 顶部导航 */
+        header {
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #003366;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #003366;
+        }
+        
+        p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 搜索?*/
+        .search-container {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.125rem;
+            border: 4px solid #003366;
+            border-radius: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 科室分类 */
+        .department {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .department h3 {
+            border-left: 4px solid #003366;
+            padding-left: 1rem;
+        }
+        
+        /* 链接列表 */
+        .link-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .link-item {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .link-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .link-item a {
+            color: #003366;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 响应式设?*/
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .link-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    
+
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header>
+            <h1 class="swiss-font">Postgres Surgeon</h1>
+            <p>Production-grade DB Audit for Supabase & Next.js</p>
+            <h2>Diagnostic Center</h2>
+        </header>
+        
+        <!-- 搜索?-->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for diagnostic guides...">
+        </div>
+        
+        <!-- 科室分类 -->
+        <div class="department" data-category="connection">
+            <h3>Connection Management Department</h3>
+            <div class="link-list">
+                <div class="link-item"><a href="supabase-connection-pooling-fix.html">Supabase Connection Pooling Fix</a></div>
+                <div class="link-item"><a href="supabase-transaction-mode-connection.html">Supabase Transaction Mode Connection</a></div>
+                <div class="link-item"><a href="supabase-serverless-connection-management.html">Supabase Serverless Connection Management</a></div>
+                <div class="link-item"><a href="supabase-connection-string-optimization.html">Supabase Connection String Optimization</a></div>
+                <div class="link-item"><a href="supabase-connection-pool-size-optimization.html">Supabase Connection Pool Size Optimization</a></div>
+            </div>
+        </div>
+        
+        <div class="department" data-category="index">
+            <h3>Index Optimization Department</h3>
+            <div class="link-list">
+                <div class="link-item"><a href="foreign-key-index-missing.html">Foreign Key Index Missing</a></div>
+                <div class="link-item"><a href="postgres-index-fragmentation-fix.html">Postgres Index Fragmentation Fix</a></div>
+                <div class="link-item"><a href="postgres-covering-index-optimization.html">Postgres Covering Index Optimization</a></div>
+                <div class="link-item"><a href="postgres-index-design-best-practices.html">Postgres Index Design Best Practices</a></div>
+            </div>
+        </div>
+        
+        <div class="department" data-category="performance">
+            <h3>Performance Tuning Department</h3>
+            <div class="link-list">
+                <div class="link-item"><a href="postgres-uuid-vs-bigint-performance.html">Postgres UUID vs BigInt Performance</a></div>
+                <div class="link-item"><a href="select-star-performance-impact.html">Select Star Performance Impact</a></div>
+                <div class="link-item"><a href="high-cost-query-optimization.html">High Cost Query Optimization</a></div>
+                <div class="link-item"><a href="postgres-sequential-scan-optimization.html">Postgres Sequential Scan Optimization</a></div>
+                <div class="link-item"><a href="postgres-query-performance-tuning.html">Postgres Query Performance Tuning</a></div>
+                <div class="link-item"><a href="uuidv7-vs-uuidv4-performance.html">UUIDv7 vs UUIDv4 Performance</a></div>
+            </div>
+        </div>
+        
+        <div class="department" data-category="database-design">
+            <h3>Database Design Department</h3>
+            <div class="link-list">
+                <div class="link-item"><a href="postgres-automatic-timestamp-updates.html">Postgres Automatic Timestamp Updates</a></div>
+                <div class="link-item"><a href="postgres-table-partitioning-strategy.html">Postgres Table Partitioning Strategy</a></div>
+                <div class="link-item"><a href="postgres-table-design-performance-optimization.html">Postgres Table Design Performance Optimization</a></div>
+            </div>
+        </div>
+        
+        <div class="department" data-category="monitoring">
+            <h3>Monitoring & Auditing Department</h3>
+            <div class="link-list">
+                <div class="link-item"><a href="supabase-db-auditing-best-practices.html">Supabase DB Auditing Best Practices</a></div>
+                <div class="link-item"><a href="postgres-explain-plan-analysis.html">Postgres Explain Plan Analysis</a></div>
+                <div class="link-item"><a href="supabase-db-performance-monitoring.html">Supabase DB Performance Monitoring</a></div>
+            </div>
+        </div>
+        
+        <div class="department" data-category="production">
+            <h3>Production Readiness Department</h3>
+            <div class="link-list">
+                <div class="link-item"><a href="supabase-production-db-tuning.html">Supabase Production DB Tuning</a></div>
+                <div class="link-item"><a href="postgres-cascade-delete-performance.html">Postgres Cascade Delete Performance</a></div>
+                <div class="link-item"><a href="supabase-db-security-auditing.html">Supabase DB Security Auditing</a></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const departments = document.querySelectorAll('.department');
+            
+            departments.forEach(department => {
+                const linkItems = department.querySelectorAll('.link-item');
+                let hasVisibleItems = false;
+                
+                linkItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasVisibleItems = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // 显示或隐藏整个科?                if (hasVisibleItems) {
+                    department.style.display = 'block';
+                } else {
+                    department.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <!-- 底部面包屑导?-->
+    <nav style="margin-top: 4rem; padding-top: 2rem; border-top: 2px solid #e2e8f0; font-size: 0.875rem;">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; padding: 0;">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
+                <a itemprop="item" href="../index.html" style="color: #3b82f6; text-decoration: none;">
+                    <span itemprop="name">Home</span>
+                </a>
+                <meta itemprop="position" content="1" />
+                <span style="margin: 0 0.5rem;">/</span>
+            </li>
+            
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
+                <a itemprop="item" href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">
+                    <span itemprop="name">All Tools</span>
+                </a>
+                <meta itemprop="position" content="2" />
+                <span style="margin: 0 0.5rem;">/</span>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
+                <span itemprop="name">index</span>
+                <meta itemprop="position" content="3" />
+            </li>
+        
+        </ol>
+    </nav>
+
+    
+    <!-- 页脚 -->
+    <footer style="margin-top: 4rem; padding: 2rem 0; border-top: 2px solid #e2e8f0; font-size: 0.875rem;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
+            <a href="https://www.wangdadi.xyz" style="color: #3b82f6; text-decoration: none;">home</a>
+            <a href="https://postgressurgeon.wangdadi.xyz" style="color: #3b82f6; text-decoration: none;">postgressurgeon</a>
+            <a href="all-topics.html" style="color: #3b82f6; text-decoration: none;">All Topics</a>
+            <span>Support: 457239850@qq.com</span>
+            <a href="sitemap.html" style="color: #3b82f6; text-decoration: none;">sitemap</a>
+        </div>
+    </footer>
+</body>
+</html>
+

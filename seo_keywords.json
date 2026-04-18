@@ -1,0 +1,702 @@
+[
+  {
+    "keyword": "check for missing foreign key indexes postgres supabase",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Is Your Database Lagging? Find Every Missing Foreign Key Index in 10 Seconds",
+    "user_query_scenario": "Developer realized deletes and updates are crawling because they forgot to manually index foreign keys in Supabase."
+  },
+  {
+    "keyword": "nextjs 15 serverless postgres connection limit reached",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Next.js 15 Database Connection Exhaustion? Use This 60-Second Fix",
+    "user_query_scenario": "App router is spawning too many lambdas, killing the DB connection pool; dev needs a surgical fix for Supavisor config."
+  },
+  {
+    "keyword": "pgvector hnsw vs ivfflat for small datasets",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Choosing the Wrong Vector Index? HNSW vs IVFFlat for Indie AI Apps",
+    "user_query_scenario": "Dev building a RAG app doesn't know which index type will save latency and memory on a budget."
+  },
+  {
+    "keyword": "prisma exhausted postgres connections nextjs app router",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Stop Prisma from Killing Your Database: Surgical Connection Pooling for Next.js",
+    "user_query_scenario": "Standard Prisma setup is opening too many connections in serverless environment; dev needs a clean pooling strategy."
+  },
+  {
+    "keyword": "uuid v4 index fragmentation postgres performance fix",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "Your UUIDs are Killing Your B-Tree: Switch to UUIDv7 or Sequential Keys",
+    "user_query_scenario": "Database inserts are getting slower as the table grows because of random UUID v4 page splits."
+  },
+  {
+    "keyword": "drizzle orm slow query debugging supabase",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Drizzle ORM Query Roast: Find Why Your Supabase Calls Are Slow",
+    "user_query_scenario": "Dev loves Drizzle's types but doesn't understand why a simple join is taking 500ms."
+  },
+  {
+    "keyword": "nextjs database cold start latency supabase fix",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Kill Cold Starts: How to Optimize Postgres Connections in Next.js Serverless",
+    "user_query_scenario": "First request to a Next.js route takes 3 seconds because the DB connection is being re-established."
+  },
+  {
+    "keyword": "postgres bloat check without extensions",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "Check Postgres Table Bloat Instantly (No Plugins Required)",
+    "user_query_scenario": "Dev is on a managed service like Supabase and can't install custom OS-level bloat tools."
+  },
+  {
+    "keyword": "kysely vs prisma performance edge functions",
+    "intent": "Alternative Seeking",
+    "difficulty": 3,
+    "target_page_title": "Kysely vs Prisma: Which ORM Actually Wins on Vercel Edge Functions?",
+    "user_query_scenario": "Dev wants to switch to a lighter ORM to avoid the Prisma engine overhead in cold starts."
+  },
+  {
+    "keyword": "check if postgres index is used by query",
+    "intent": "Problem Solving",
+    "difficulty": 2,
+    "target_page_title": "Is Your Index Actually Working? How to Verify Postgres Index Usage",
+    "user_query_scenario": "Dev created an index but EXPLAIN ANALYZE shows a Seq Scan. They don't know why."
+  },
+  {
+    "keyword": "supabase pgvector index build taking too long",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Stuck on 'Building Index'? Speed Up pgvector HNSW Index Creation",
+    "user_query_scenario": "Adding a vector index to 100k rows is hanging the database; dev needs a surgical config tweak."
+  },
+  {
+    "keyword": "postgres count(*) slow on large table supabase",
+    "intent": "Problem Solving",
+    "difficulty": 1,
+    "target_page_title": "Stop Using COUNT(*): Faster Ways to Count 1M+ Rows in Postgres",
+    "user_query_scenario": "Dashboard stats are timing out because Postgres is scanning the whole table for a count."
+  },
+  {
+    "keyword": "postgres jsonb vs relational performance 2026",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "JSONB or Columns? The Brutal Truth About Postgres Document Storage Performance",
+    "user_query_scenario": "Indie dev is overusing JSONB and now queries are impossible to optimize."
+  },
+  {
+    "keyword": "supabase rls policy slow query performance",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Your RLS Policies are Killing Performance: How to Audit Row Level Security",
+    "user_query_scenario": "Every query is slow because the RLS policy is doing a hidden join on every row check."
+  },
+  {
+    "keyword": "prisma skip engine cold start nextjs",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "Prisma Cold Start Hack: Using Data Proxy or Accelerated Workers",
+    "user_query_scenario": "Dev is frustrated with Prisma binary size causing slow Vercel deployments and cold starts."
+  },
+  {
+    "keyword": "postgres gin index vs btree for search",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "GIN or B-Tree? Choose the Right Index for Your Search Queries",
+    "user_query_scenario": "Full-text search is slow because the dev is using ILIKE instead of a proper GIN index."
+  },
+  {
+    "keyword": "supabase remaining connection slots are reserved",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Fix: Remaining Connection Slots are Reserved (Supabase Error)",
+    "user_query_scenario": "Critical error in production; dev needs to know how to kill idle connections surgically."
+  },
+  {
+    "keyword": "postgres vacuum not cleaning up dead tuples",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Why Autovacuum is Failing: Fix Postgres Bloat Before It Crashes Your App",
+    "user_query_scenario": "Database disk space is rising even though rows are being deleted; autovacuum is stuck."
+  },
+  {
+    "keyword": "optimizing postgres for read heavy nextjs app",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "Read-Heavy Next.js Apps: 5 Postgres Tweaks to 10x Your Throughput",
+    "user_query_scenario": "Traffic is spiking and the DB is hitting 90% CPU on simple select queries."
+  },
+  {
+    "keyword": "supabase edge function database timeout",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Fixing Edge Function DB Timeouts: Best Connection Practices",
+    "user_query_scenario": "Edge function dies before finishing the DB call; dev needs a better fetch/pool strategy."
+  },
+  {
+    "keyword": "postgres explain analyze for beginners supabase",
+    "intent": "Tutorial",
+    "difficulty": 1,
+    "target_page_title": "Stop Guessing: A Surgeon's Guide to EXPLAIN ANALYZE in Supabase",
+    "user_query_scenario": "Dev sees the query plan but it looks like gibberish; they need a 'surgery' to explain it."
+  },
+  {
+    "keyword": "fix postgres deadlock in nodejs app",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Deadlock Detected! How to Trace and Kill Postgres Deadlocks in Node.js",
+    "user_query_scenario": "Concurrent updates are causing the app to hang; dev needs a script to find the offending SQL."
+  },
+  {
+    "keyword": "supabase storage vs pgvector for embeddings",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Embeddings Storage: Should You Use PGVector or Raw Files?",
+    "user_query_scenario": "Founder is worried about the cost and performance of storing 1M vectors in Postgres."
+  },
+  {
+    "keyword": "postgres partial index for soft deletes performance",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "The Soft Delete Trap: Use Partial Indexes to Save Your Postgres Performance",
+    "user_query_scenario": "Dev uses 'is_deleted' column and doesn't realize it's making all indexes 2x larger than necessary."
+  },
+  {
+    "keyword": "drizzle migrations stuck on supabase",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Fix: Drizzle Migrations Hanging or Failing on Supabase",
+    "user_query_scenario": "Migration lock didn't release; dev needs to surgically reset the migration table."
+  },
+  {
+    "keyword": "postgres index read vs write trade-off",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "Too Many Indexes? Balancing Read Speed and Write Performance",
+    "user_query_scenario": "Inserts are slow because the dev added 15 indexes to a single table."
+  },
+  {
+    "keyword": "supabase self-hosted vs cloud performance 2026",
+    "intent": "Alternative Seeking",
+    "difficulty": 3,
+    "target_page_title": "Is Supabase Cloud Worth the Latency? Self-Hosting vs Cloud Benchmarks",
+    "user_query_scenario": "Solo dev wondering if they should switch to a local Postgres for better response times."
+  },
+  {
+    "keyword": "postgres notify vs polling for nextjs real-time",
+    "intent": "Architecture Design",
+    "difficulty": 2,
+    "target_page_title": "Real-time Next.js: Don't Poll, Use Postgres NOTIFY (Properly)",
+    "user_query_scenario": "App is doing 1000 requests/sec just to check for new messages; dev needs a surgical event-driven fix."
+  },
+  {
+    "keyword": "supabase dashboard sql slow logs missing",
+    "intent": "Problem Solving",
+    "difficulty": 2,
+    "target_page_title": "Can't Find Slow Queries in Supabase? Use This Surgery Script",
+    "user_query_scenario": "Dashboard isn't granular enough to show a 200ms query that runs 10k times a minute."
+  },
+  {
+    "keyword": "postgres connection pool sizing serverless",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "The Golden Rule for Connection Pool Sizing in Serverless Environments",
+    "user_query_scenario": "Dev is guessing the 'max_connections' number and either wasting RAM or hitting limits."
+  },
+  {
+    "keyword": "how to find unused indexes in postgres supabase",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "Stop Wasting RAM: Find and Delete Unused Postgres Indexes",
+    "user_query_scenario": "Database is bloated with indexes that haven't been touched in months."
+  },
+  {
+    "keyword": "postgres gin index bloat pg_trgm",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Is Your Full-Text Search Bloated? Fix GIN Index Issues in Postgres",
+    "user_query_scenario": "Search index is now larger than the data itself; dev needs to re-index or tune."
+  },
+  {
+    "keyword": "supabase auth slow sign in database latency",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Why Supabase Auth is Slow: Tracing DB Latency in User Sign-ins",
+    "user_query_scenario": "Users are complaining that login takes 5 seconds; dev suspects a custom trigger is the culprit."
+  },
+  {
+    "keyword": "postgres trigger vs nextjs middleware performance",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Where Should Your Logic Live? Postgres Triggers vs Next.js Middleware",
+    "user_query_scenario": "Dev is putting too much logic in JS and causing 3 extra DB roundtrips per request."
+  },
+  {
+    "keyword": "postgres select count slow supabase fix",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "100ms to 1ms: Fast Counting in Postgres Without Table Scans",
+    "user_query_scenario": "Pagination is slow because it calculates total pages using a full count every time."
+  },
+  {
+    "keyword": "postgres pgbouncer vs supavisor performance",
+    "intent": "Alternative Seeking",
+    "difficulty": 3,
+    "target_page_title": "PgBouncer vs Supavisor: Choosing the Right Pooler for Your SaaS",
+    "user_query_scenario": "High-traffic app needs to decide on the most efficient way to handle 10k concurrent lambdas."
+  },
+  {
+    "keyword": "postgres surgical fix for corrupted index",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Index Corruption? Use REINDEX CONCURRENTLY Without Downtime",
+    "user_query_scenario": "Queries are returning wrong results or failing; dev needs to fix indexes without locking the table."
+  },
+  {
+    "keyword": "supabase rls bypassing performance hack",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "When to Bypass RLS: Boosting Performance for Admin Dashboards",
+    "user_query_scenario": "Admin dashboard is slow because RLS is checking permissions on 50k rows for every view."
+  },
+  {
+    "keyword": "postgres materialize view vs cache in nextjs",
+    "intent": "Architecture Design",
+    "difficulty": 2,
+    "target_page_title": "Materialized Views or Redis? Choosing the Right Cache for Postgres",
+    "user_query_scenario": "Aggregated report is slow; dev doesn't know if they should use PG features or external cache."
+  },
+  {
+    "keyword": "postgres audit log table performance fix",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Audit Logs Growing Too Fast? Fix Your Postgres Logging Performance",
+    "user_query_scenario": "Insert speed is dropping because the audit log table has hit 100M rows and has no partitioning."
+  },
+  {
+    "keyword": "nextjs pgrst_query_timeout supabase fix",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Fix: pgrst_query_timeout on Supabase and Next.js",
+    "user_query_scenario": "Long-running report is being killed by PostgREST before it finishes."
+  },
+  {
+    "keyword": "postgres index for ilike %keyword% search",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Search with ILIKE is Slow? Use This Postgres Indexing Trick",
+    "user_query_scenario": "Dev didn't know you can't use standard B-Tree for leading wildcard searches."
+  },
+  {
+    "keyword": "supabase postgrest vs direct pg connection",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Supabase API or Direct SQL? Latency and Performance Comparison",
+    "user_query_scenario": "Dev wonders if the REST API overhead is why their app feels 'snappy' but the DB is idle."
+  },
+  {
+    "keyword": "postgres surgical find large rows in table",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "Identify Heavy Rows: Find What's Eating Your Postgres Storage",
+    "user_query_scenario": "Storage quota is full; dev needs to find which rows have 10MB JSON blobs."
+  },
+  {
+    "keyword": "postgres check for overlapping indexes supabase",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Redundant Indexes? Clean Up Overlapping Postgres Indexes",
+    "user_query_scenario": "Dev has an index on (A, B) and another on (A). One is likely useless."
+  },
+  {
+    "keyword": "nextjs server action database performance best practices",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Fast Server Actions: Optimizing DB Calls in Next.js 15",
+    "user_query_scenario": "Server actions feel laggy; dev is doing sequential awaits instead of parallel DB queries."
+  },
+  {
+    "keyword": "postgres temporary table vs jsonb in nextjs",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "High-Performance Data Processing: Temp Tables vs JSONB Blobs",
+    "user_query_scenario": "Dev needs to process 5000 items from a form; doesn't know the most efficient way to send to PG."
+  },
+  {
+    "keyword": "supabase postgres statement_timeout best practice",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Prevent Rogue Queries: Setting the Perfect Statement Timeout",
+    "user_query_scenario": "One bad query from a user is locking up the whole DB for 30 seconds."
+  },
+  {
+    "keyword": "postgres vacuum full alternatives without locking",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "VACUUM FULL is Too Slow? Use pg_repack or These Surgery Hacks",
+    "user_query_scenario": "DB is 50% bloat but the dev can't afford 2 hours of downtime for a full vacuum."
+  },
+  {
+    "keyword": "check postgres connections by user supabase",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Who's Stealing Your Connections? Audit PG Connections by User",
+    "user_query_scenario": "DB is full; dev needs to see if it's the dashboard, the API, or a leaked lambda."
+  },
+  {
+    "keyword": "postgres primary key bigserial vs uuid performance",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "BigSerial vs UUID: The Brutal Impact on Your Database Performance",
+    "user_query_scenario": "Starting a new project and wants to avoid the 'sequential ID' security leak without the UUID penalty."
+  },
+  {
+    "keyword": "optimize postgres for pg_search gem like search",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Building a Search Engine? Surgical Indexing for Full Text Search",
+    "user_query_scenario": "Dev is migrating from Rails and wants to replicate pg_search performance in a Node/Next app."
+  },
+  {
+    "keyword": "supabase pgvector vs pinecone cost and performance",
+    "intent": "Alternative Seeking",
+    "difficulty": 3,
+    "target_page_title": "Stop Paying for Pinecone: Optimizing PGVector for AI SaaS",
+    "user_query_scenario": "Founder is paying $200/mo for a vector DB and wants to move it all into their $25/mo Supabase plan."
+  },
+  {
+    "keyword": "postgres find longest running queries script",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Find and Kill: The 10 Slowest Queries in Your Database Right Now",
+    "user_query_scenario": "Server CPU is at 100%; dev needs a surgery script to find the culprit."
+  },
+  {
+    "keyword": "postgres index for timestamp range query",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Slow Dashboard? surgical Indexing for Timestamp Range Queries",
+    "user_query_scenario": "Filtering logs by 'last 7 days' is taking 2 seconds."
+  },
+  {
+    "keyword": "supabase rls performance issues with many roles",
+    "intent": "Debugging",
+    "difficulty": 3,
+    "target_page_title": "Scaling RLS: Handling Complex Permissions Without Slowing Down",
+    "user_query_scenario": "B2B SaaS with complex team/role permissions is hitting RLS performance walls."
+  },
+  {
+    "keyword": "nextjs prisma dmmf cold start issue",
+    "intent": "Debugging",
+    "difficulty": 3,
+    "target_page_title": "Is Prisma DMMF Bloating Your Lambdas? Fix Cold Start Latency",
+    "user_query_scenario": "Next.js bundle is too large because of Prisma; dev needs a surgical way to reduce engine size."
+  },
+  {
+    "keyword": "postgres cluster command vs reindex performance",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "CLUSTER or REINDEX? Restoring Order to Your Postgres Tables",
+    "user_query_scenario": "Dev wants to physically reorder data for faster range scans but fears the table lock."
+  },
+  {
+    "keyword": "supabase postgrest filters vs raw sql performance",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "The PostgREST Performance Trap: When to Switch to Raw SQL",
+    "user_query_scenario": "Complex chaining of '.eq().or().ilike()' is producing inefficient SQL."
+  },
+  {
+    "keyword": "postgres surgical fix for invalid index",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Fix: Index Created CONCURRENTLY is INVALID",
+    "user_query_scenario": "Index build failed midway; dev doesn't know how to clean up the 'invalid' index safely."
+  },
+  {
+    "keyword": "nextjs database connection leak debugging",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Find the Leak: Why Your Next.js App Never Closes DB Connections",
+    "user_query_scenario": "Connections stay open even after the request finishes, eventually crashing the DB."
+  },
+  {
+    "keyword": "postgres optimize updates on heavily indexed table",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Slow Updates? Surgical Hacks for Postgres Tables with 10+ Indexes",
+    "user_query_scenario": "A simple 'update status' takes 300ms because 10 indexes have to be updated."
+  },
+  {
+    "keyword": "supabase connection pooler vs edge runtime",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Edge Runtime DB Connections: Supavisor vs Direct Fetch",
+    "user_query_scenario": "Dev is confused if they should use the new Supabase-JS pooling or a custom pooler."
+  },
+  {
+    "keyword": "postgres index for case insensitive search",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Lower() vs CITEXT: The Best Way to Index Case-Insensitive Search",
+    "user_query_scenario": "User search is slow because the index is case-sensitive but the query uses ILIKE."
+  },
+  {
+    "keyword": "postgres surgical check for table lock",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Who's Locking the Table? Find and Terminate Postgres Locks",
+    "user_query_scenario": "App is frozen; dev needs to find which migration or long query is holding an AccessExclusiveLock."
+  },
+  {
+    "keyword": "supabase db storage exceeded surgical cleanup",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "Storage Full! Surgical Ways to Shrink Your Supabase Database",
+    "user_query_scenario": "Dev hit the 8GB limit and needs to find the biggest tables/bloat immediately."
+  },
+  {
+    "keyword": "postgres optimize sort operations in queries",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Stop Sorting on Disk: Tuning work_mem for Faster Postgres Queries",
+    "user_query_scenario": "Explain analyze shows 'External merge Disk' for sorting; query is extremely slow."
+  },
+  {
+    "keyword": "nextjs server actions db transaction best practice",
+    "intent": "Architecture Design",
+    "difficulty": 2,
+    "target_page_title": "Atomic Server Actions: How to Handle DB Transactions in Next.js",
+    "user_query_scenario": "Dev created a user but failed to send the email; needs a surgical way to rollback."
+  },
+  {
+    "keyword": "postgres fix slow nested loop join",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Nested Loop from Hell: How to Fix Poor Join Performance in Postgres",
+    "user_query_scenario": "Query planner is choosing a nested loop for 1M rows; dev needs to fix stats or hints."
+  },
+  {
+    "keyword": "supabase trigger function vs pg_net performance",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Webhooks from Postgres: Native Triggers vs pg_net Performance",
+    "user_query_scenario": "Dev is sending webhooks from DB; wants to know if it's slowing down transactions."
+  },
+  {
+    "keyword": "postgres index for jsonb key existence",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "JSONB Key Search is Slow? Indexing for Existence in Postgres",
+    "user_query_scenario": "Checking 'where metadata ? 'pro_user'' is doing a full table scan."
+  },
+  {
+    "keyword": "postgres surgical check for bloated toast tables",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Hidden Bloat: How to Audit and Fix Postgres TOAST Table Issues",
+    "user_query_scenario": "The main table looks fine, but the DB size is massive; TOAST is the culprit."
+  },
+  {
+    "keyword": "supabase postgres version upgrade performance impact",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "Upgrading to PG 16/17? New Performance Features for SaaS Devs",
+    "user_query_scenario": "Founder wants to know if upgrading will automatically fix their query speed."
+  },
+  {
+    "keyword": "postgres surgical script for index health check",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "The 30-Second Postgres Index Health Check for Production",
+    "user_query_scenario": "Dev wants a daily routine to ensure no indexes are invalid or unused."
+  },
+  {
+    "keyword": "nextjs prisma connection pool for multi tenant app",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Multi-Tenant Database Design: Pooling Connections for 100+ DBs",
+    "user_query_scenario": "SaaS app with separate DBs per tenant is hitting connection limits instantly."
+  },
+  {
+    "keyword": "postgres fix slow order by with limit",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "Fast Pagination: Optimizing ORDER BY ... LIMIT in Postgres",
+    "user_query_scenario": "Query is fast without the limit, but adding 'LIMIT 20' makes it take 2 seconds."
+  },
+  {
+    "keyword": "supabase edge function latency vs cold start 2026",
+    "intent": "Debugging",
+    "difficulty": 3,
+    "target_page_title": "The Brutal Truth About Supabase Edge Function Latency",
+    "user_query_scenario": "Dev is frustrated that their 'edge' app feels slower than a legacy VPS."
+  },
+  {
+    "keyword": "postgres surgical check for unused sequences",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "Cleaning Up: How to Find and Remove Orphaned Postgres Sequences",
+    "user_query_scenario": "Database schema is messy after multiple migrations; dev wants to clean up."
+  },
+  {
+    "keyword": "postgres partial index for boolean flag performance",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Boolean Indexing Hack: Use Partial Indexes for 'Active' Status",
+    "user_query_scenario": "99% of users are inactive; indexing the whole column is a waste of 500MB."
+  },
+  {
+    "keyword": "supabase rest vs graphql performance comparison",
+    "intent": "Alternative Seeking",
+    "difficulty": 3,
+    "target_page_title": "GraphQL on Supabase: Performance Overhead vs REST API",
+    "user_query_scenario": "Dev wants to use pg_graphql but is worried about the CPU impact on their small DB."
+  },
+  {
+    "keyword": "postgres optimize group by on millions of rows",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Surgical Grouping: Aggregating Millions of Rows in Postgres",
+    "user_query_scenario": "Analytics dashboard is timing out on 'group by month' queries."
+  },
+  {
+    "keyword": "postgres surgical fix for out of memory error",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Postgres OOM? Surgical Tweaks to Save Your Database from Crashing",
+    "user_query_scenario": "DB crashed with 'Out of Memory'; dev needs to find the memory-hungry query."
+  },
+  {
+    "keyword": "supabase vector store for semantic search tutorial",
+    "intent": "Tutorial",
+    "difficulty": 2,
+    "target_page_title": "Building Semantic Search? Surgical pgvector Setup for SaaS",
+    "user_query_scenario": "Dev wants to build 'Search through my docs' feature and needs an optimized schema."
+  },
+  {
+    "keyword": "postgres index for array column contains search",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Indexing Arrays: How to Speed Up 'column @> {tag}' Queries",
+    "user_query_scenario": "Tag-based filtering is slow because the dev is using an array column without a GIN index."
+  },
+  {
+    "keyword": "nextjs server side caching with supabase db",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Cache It Right: Next.js Data Cache vs Postgres Materialized Views",
+    "user_query_scenario": "Dev is over-fetching from DB; needs a surgical caching layer."
+  },
+  {
+    "keyword": "postgres surgical check for slow triggers",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Hidden Latency: How to Audit and Profile Postgres Triggers",
+    "user_query_scenario": "Inserts take 500ms; dev doesn't realize a 'simple' trigger is doing an unindexed scan."
+  },
+  {
+    "keyword": "supabase pg_net vs edge function for async tasks",
+    "intent": "Architecture Design",
+    "difficulty": 3,
+    "target_page_title": "Async Tasks in Supabase: pg_net vs Edge Functions Comparison",
+    "user_query_scenario": "Dev needs to trigger a long-running job after a DB insert."
+  },
+  {
+    "keyword": "postgres optimize recursive cte performance",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "Recursive CTE Too Slow? Surgical Hacks for Hierarchical Data",
+    "user_query_scenario": "Fetching a file tree or org chart is taking 3 seconds."
+  },
+  {
+    "keyword": "postgres fix slow join on uuid columns",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "UUID Joins are Slow? Surgical Indexing for Modern Postgres Tables",
+    "user_query_scenario": "Joining two tables on UUIDs is 5x slower than BigInt; dev needs to fix it."
+  },
+  {
+    "keyword": "supabase database size reporting wrong fix",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Why is My Supabase DB Size So Big? Finding the Hidden Bloat",
+    "user_query_scenario": "Dashboard says 5GB, but the dev only has 100k rows of text."
+  },
+  {
+    "keyword": "postgres surgical check for redundant constraints",
+    "intent": "Optimization",
+    "difficulty": 1,
+    "target_page_title": "Performance Clean Up: Removing Redundant Postgres Constraints",
+    "user_query_scenario": "Multiple check constraints and triggers are slowing down every insert."
+  },
+  {
+    "keyword": "nextjs serverless function db connection timeout vercel",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Vercel DB Timeouts: Solving the Serverless Connection Puzzle",
+    "user_query_scenario": "Functions are timing out at 10s because the DB connection pool is saturated."
+  },
+  {
+    "keyword": "postgres optimize like search with trigram index",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Fuzzy Search Too Slow? surgical Setup for pg_trgm Indexes",
+    "user_query_scenario": "Autocomplete is slow; dev needs a trigram index for fast 'contains' queries."
+  },
+  {
+    "keyword": "supabase postgres wal size growing too fast fix",
+    "intent": "Debugging",
+    "difficulty": 3,
+    "target_page_title": "WAL Out of Control? Fix Your Postgres Write-Ahead Log Growth",
+    "user_query_scenario": "Write-heavy app is causing the WAL to eat all disk space on Supabase."
+  },
+  {
+    "keyword": "postgres surgical fix for slow distinct query",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "SELECT DISTINCT is Slow? How to Index for Unique Value Scans",
+    "user_query_scenario": "Getting a list of unique categories takes 2 seconds on a 1M row table."
+  },
+  {
+    "keyword": "nextjs pgrst_query_timeout supabase fix reddit",
+    "intent": "Problem Solving",
+    "difficulty": 1,
+    "target_page_title": "Stop the Timeout: Fixing pgrst_query_timeout Once and For All",
+    "user_query_scenario": "Dev searching for a quick fix they saw on Reddit for their timing out dashboard."
+  },
+  {
+    "keyword": "postgres optimize large text search gin vs rum",
+    "intent": "Optimization",
+    "difficulty": 3,
+    "target_page_title": "GIN or RUM? Advanced Indexing for Heavy Full-Text Search",
+    "user_query_scenario": "Dev needs the fastest possible search for their document-heavy SaaS."
+  },
+  {
+    "keyword": "supabase auto-generated api slow performance",
+    "intent": "Debugging",
+    "difficulty": 2,
+    "target_page_title": "Is the Supabase API Slow? Auditing PostgREST Overhead",
+    "user_query_scenario": "Dev suspects the auto-generated API is the reason for high latency."
+  },
+  {
+    "keyword": "postgres surgical script to kill idle transactions",
+    "intent": "Debugging",
+    "difficulty": 1,
+    "target_page_title": "Idle in Transaction? Kill the Queries That Are Locking Your DB",
+    "user_query_scenario": "One dev's forgotten SQL console is blocking production deployments."
+  },
+  {
+    "keyword": "postgres surgical audit of schema anti-patterns",
+    "intent": "Optimization",
+    "difficulty": 2,
+    "target_page_title": "Your Schema Sucks: 10 Postgres Anti-Patterns You Need to Fix Now",
+    "user_query_scenario": "Senior dev wants to audit a junior's schema before it hits production."
+  }
+]

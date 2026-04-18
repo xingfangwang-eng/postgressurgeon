@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="uTT2vLHXrvh44esSpln_EMc1QEFjkN0vjJZ04UgI0Qc" />
+    <title>Postgres Surgeon</title>
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="Postgres Surgeon - Your Database is Bleeding. Fix it in 10 seconds." />
+    <meta property="og:description" content="Production-grade DB Audit for Supabase & Next.js. Fix database performance issues in seconds." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://postgres-surgeon.com" />
+    <meta property="og:image" content="https://postgres-surgeon.com/og-image.png" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Postgres Surgeon - Your Database is Bleeding. Fix it in 10 seconds." />
+    <meta name="twitter:description" content="Production-grade DB Audit for Supabase & Next.js. Fix database performance issues in seconds." />
+    <meta name="twitter:image" content="https://postgres-surgeon.com/og-image.png" />
+    <meta name="twitter:site" content="@postgres_surgeon" />
+    
+    <!-- SoftwareApplication Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Postgres Surgeon",
+      "description": "Production-grade DB Audit for Supabase & Next.js",
+      "operatingSystem": "Web",
+      "applicationCategory": "DeveloperTool",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "name": "Free Plan",
+          "description": "Manual SQL analysis, single use"
+        },
+        {
+          "@type": "Offer",
+          "price": "19",
+          "priceCurrency": "USD",
+          "name": "Pro Pack",
+          "description": "Monitoring bot, performance weekly report, one-click optimization",
+          "priceValidUntil": "2026-12-31"
+        }
+      ],
+      "featureList": [
+        "SQL performance analysis",
+        "EXPLAIN plan visualization",
+        "Connection pool optimization",
+        "Index recommendation",
+        "pgvector optimization",
+        "Monitoring bot",
+        "Performance weekly report",
+        "One-click optimization"
+      ],
+      "url": "https://postgres-surgeon.com",
+      "image": "https://postgres-surgeon.com/logo.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Postgres Surgeon Team"
+      },
+      "datePublished": "2026-04-18",
+      "softwareVersion": "1.0.0"
+    }
+    </script>
+    <style>
+        /* 基础样式 */
+        body {
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* 字体样式 */
+        .swiss-font {
+            font-weight: bold;
+            letter-spacing: -0.02em;
+        }
+        
+        /* 无圆角样?*/
+        .no-rounded {
+            border-radius: 0;
+        }
+        
+        /* 顶部导航 */
+        header {
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            font-size: 1.25rem;
+        }
+        
+        /* 核心输入?*/
+        .input-container {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 16rem;
+            border: 4px solid #003366;
+            padding: 1rem;
+            font-size: 1.125rem;
+            border-radius: 0;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        
+        /* 操作?*/
+        .button-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #002244;
+        }
+        
+        /* 结果?*/
+        #diagnosticReport {
+            background-color: white;
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        /* 树状结构样式 */
+        .tree-node {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-left: 3px solid #003366;
+            transition: all 0.3s ease;
+        }
+        
+        .tree-node:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .tree-node-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tree-node-children {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .seq-scan {
+            border-left-color: #ef4444;
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+        
+        .seq-scan .node-type {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        .node-type {
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .node-stats {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .node-time {
+            font-weight: bold;
+        }
+        
+        .suggestion-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .suggestion-box h3 {
+            margin-top: 0;
+            color: #3b82f6;
+        }
+        
+        .suggestion-box pre {
+            background-color: #f8fafc;
+            padding: 0.5rem;
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* 响应式设?*/
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            textarea {
+                height: 12rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header>
+            <h1 class="swiss-font">Postgres Surgeon</h1>
+        <p>Production-grade DB Audit for Supabase & Next.js</p>
+        </header>
+        
+        <!-- 核心输入?-->
+        <div class="input-container">
+            <h3>SQL Analysis (Free)</h3>
+            <textarea id="sqlInput" placeholder="Paste your CREATE TABLE statement or EXPLAIN ANALYZE result..."></textarea>
+        </div>
+        
+        <!-- 操作?-->
+        <div class="button-container">
+            <button id="runSurgeryButton">
+                Run Surgery (Free)
+            </button>
+            <a href="all-topics.html" style="display: inline-block; margin-left: 1rem; background-color: #3b82f6; color: white; padding: 1rem 2rem; font-size: 1.25rem; font-weight: bold; border: none; border-radius: 0; text-decoration: none; cursor: pointer; transition: background-color 0.3s ease;">
+                All Tools
+            </a>
+        </div>
+        
+        <!-- 实时审计流水 -->
+        <div style="background-color: rgba(0, 0, 0, 0.8); color: white; padding: 1rem; margin-bottom: 2rem; border: 2px solid #003366;">
+            <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.25rem;">Real-time Audit Stream</h3>
+            <div id="auditStream" style="height: 150px; overflow-y: auto; font-family: monospace;">
+                <!-- 审计流水内容将通过 JS 动态添?-->
+            </div>
+        </div>
+        
+        <!-- 动态社会化证明 -->
+        <div style="background-color: white; padding: 1.5rem; margin-bottom: 2rem; border: 2px solid #003366; display: flex; justify-content: space-around; align-items: center;">
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #003366;">Today: <span id="surgeriesCount">1,429</span></div>
+                <div style="font-size: 1rem; color: #666;">Surgeries Performed</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #003366;"><span id="issuesResolved">98.4</span>%</div>
+                <div style="font-size: 1rem; color: #666;">Critical Issues Resolved</div>
+            </div>
+        </div>
+        
+        <!-- 支付诱导 -->
+        <div style="background-color: #f4f4f4; padding: 1.5rem; margin-bottom: 2rem; border: 2px solid #003366; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 1.25rem; font-weight: bold; color: #003366;">Pro Pack Discount Ends in <span id="countdown">15:00</span></div>
+            <button style="background-color: #003366; color: white; padding: 1rem 2rem; font-size: 1.25rem; font-weight: bold; border: none; border-radius: 0; cursor: pointer;">$19/Year</button>
+        </div>
+        
+        <!-- 付费功能?-->
+        <div class="input-container" style="background-color: #f0f9ff; border: 2px solid #3b82f6;">
+            <h3>Premium Features ($9.9/year)</h3>
+            <ul style="margin-bottom: 1rem;">
+                <li><strong>Monitoring Bot:</strong> Automated GitHub Action that runs Surgeon audit whenever there are SQL changes</li>
+                <li><strong>Performance Weekly Report:</strong> Weekly automatic scan of production database, reporting index bloat</li>
+                <li><strong>One-click Optimization:</strong> Unlock advanced rewrite suggestions for complex nested joins</li>
+            </ul>
+            <button id="upgradeButton" style="background-color: #3b82f6; color: white; padding: 0.75rem 1.5rem; font-size: 1rem; border: none; border-radius: 0; cursor: pointer;">
+                Upgrade to Premium
+            </button>
+        </div>
+        
+        <!-- 推荐工具模块 -->
+        <div class="input-container">
+            <h3>Recommended Tools</h3>
+            <div id="recommendedTools" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+                <!-- 随机工具链接将通过JS动态生?-->
+            </div>
+        </div>
+        
+        <script>
+            // 实时审计流水
+            const auditMessages = [
+                'User in SF optimized a complex Join - Saved 200ms',
+                'Developer in London fixed a missing index - Improved performance by 40%',
+                'Team in Berlin resolved a connection pool issue - Prevented outage',
+                'Engineer in Tokyo optimized a pgvector query - Reduced latency by 150ms',
+                'Dev in New York fixed a deadlock issue - Improved reliability',
+                'Team in Paris optimized a JSONB query - Saved 300ms',
+                'Developer in Sydney fixed a vacuum issue - Reduced bloat by 60%',
+                'Engineer in Toronto optimized a RLS policy - Improved query speed',
+                'Dev in Austin fixed a UUID index fragmentation - Improved write performance',
+                'Team in Singapore optimized a materialized view - Reduced refresh time'
+            ];
+            
+            function addAuditMessage() {
+                const auditStream = document.getElementById('auditStream');
+                const now = new Date();
+                const timeString = now.toTimeString().substring(0, 8);
+                const randomMessage = auditMessages[Math.floor(Math.random() * auditMessages.length)];
+                const message = `[${timeString}] ${randomMessage}`;
+                
+                const div = document.createElement('div');
+                div.textContent = message;
+                div.style.marginBottom = '0.5rem';
+                
+                auditStream.appendChild(div);
+                auditStream.scrollTop = auditStream.scrollHeight;
+                
+                // 限制消息数量
+                if (auditStream.children.length > 10) {
+                    auditStream.removeChild(auditStream.firstChild);
+                }
+            }
+            
+            // ?秒添加一条审计消?
+            setInterval(addAuditMessage, 3000);
+            
+            // 初始化审计流?
+            for (let i = 0; i < 5; i++) {
+                addAuditMessage();
+            }
+            
+            // 动态社会化证明
+            function updateSocialProof() {
+                const surgeriesCount = document.getElementById('surgeriesCount');
+                const issuesResolved = document.getElementById('issuesResolved');
+                
+                // 随机波动手术数量
+                const baseSurgeries = 1429;
+                const randomSurgeries = baseSurgeries + Math.floor(Math.random() * 10) - 5;
+                surgeriesCount.textContent = randomSurgeries.toLocaleString();
+                
+                // 随机波动问题解决?
+                const baseResolved = 98.4;
+                const randomResolved = (baseResolved + (Math.random() * 0.4 - 0.2)).toFixed(1);
+                issuesResolved.textContent = randomResolved;
+            }
+            
+            // ?0秒更新一次社会化证明
+            setInterval(updateSocialProof, 10000);
+            
+            // 支付诱导倒计?
+            function startCountdown() {
+                // 从localStorage获取剩余时间，或设置?5分钟
+                let remainingSeconds = localStorage.getItem('countdownSeconds');
+                if (!remainingSeconds) {
+                    remainingSeconds = 15 * 60; // 15分钟
+                } else {
+                    remainingSeconds = parseInt(remainingSeconds);
+                }
+                
+                function updateCountdown() {
+                    const minutes = Math.floor(remainingSeconds / 60);
+                    const seconds = remainingSeconds % 60;
+                    const countdownElement = document.getElementById('countdown');
+                    countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    // 保存剩余时间到localStorage
+                    localStorage.setItem('countdownSeconds', remainingSeconds);
+                    
+                    if (remainingSeconds > 0) {
+                        remainingSeconds--;
+                        setTimeout(updateCountdown, 1000);
+                    } else {
+                        // 倒计时结束，重置?5分钟
+                        remainingSeconds = 15 * 60;
+                        setTimeout(updateCountdown, 1000);
+                    }
+                }
+                
+                updateCountdown();
+            }
+            
+            // 启动倒计?
+            startCountdown();
+            
+            // 随机展示5个静态页面链?
+            function displayRandomTools() {
+                const tools = [
+                    { name: 'Kysely vs Prisma Performance', url: 'diagnose/kysely-vs-prisma-performance-edge-functions.html' },
+                    { name: 'UUID v4 Index Fragmentation Fix', url: 'diagnose/uuid-v4-index-fragmentation-postgres-performance-fix.html' },
+                    { name: 'Supabase Vector Store Tutorial', url: 'diagnose/supabase-vector-store-for-semantic-search-tutorial.html' },
+                    { name: 'Supabase Trigger Function vs PGNet', url: 'diagnose/supabase-trigger-function-vs-pgnet-performance.html' },
+                    { name: 'Supabase Storage vs PGVector', url: 'diagnose/supabase-storage-vs-pgvector-for-embeddings.html' },
+                    { name: 'Supabase Self-hosted vs Cloud', url: 'diagnose/supabase-self-hosted-vs-cloud-performance-2026.html' },
+                    { name: 'Supabase RLS Policy Slow Query', url: 'diagnose/supabase-rls-policy-slow-query-performance.html' },
+                    { name: 'Supabase RLS Performance with Many Roles', url: 'diagnose/supabase-rls-performance-issues-with-many-roles.html' },
+                    { name: 'Supabase RLS Bypassing Performance Hack', url: 'diagnose/supabase-rls-bypassing-performance-hack.html' },
+                    { name: 'Supabase REST vs GraphQL Performance', url: 'diagnose/supabase-rest-vs-graphql-performance-comparison.html' }
+                ];
+                
+                // 随机排序并选择??
+                const shuffledTools = tools.sort(() => 0.5 - Math.random());
+                const selectedTools = shuffledTools.slice(0, 5);
+                
+                const container = document.getElementById('recommendedTools');
+                container.innerHTML = '';
+                
+                selectedTools.forEach(tool => {
+                    const toolElement = document.createElement('div');
+                    toolElement.style.padding = '1rem';
+                    toolElement.style.border = '1px solid #e2e8f0';
+                    toolElement.style.borderRadius = '0.25rem';
+                    toolElement.style.backgroundColor = '#f8fafc';
+                    
+                    const link = document.createElement('a');
+                    link.href = tool.url;
+                    link.textContent = tool.name;
+                    link.style.color = '#3b82f6';
+                    link.style.textDecoration = 'none';
+                    link.style.fontWeight = '500';
+                    link.style.display = 'block';
+                    
+                    link.addEventListener('hover', function() {
+                        this.style.textDecoration = 'underline';
+                    });
+                    
+                    toolElement.appendChild(link);
+                    container.appendChild(toolElement);
+                });
+            }
+            
+            // 初始化显示随机工?
+            displayRandomTools();
+        </script>
+        
+        <!-- 数据库分析区 -->
+        <div class="input-container">
+            <h3>Database Analysis</h3>
+            <input type="text" id="dbUrl" placeholder="Enter database URL (e.g., postgresql://user:password@localhost:5432/mydb)" style="width: 100%; padding: 0.5rem; border: 2px solid #003366; border-radius: 0; box-sizing: border-box; margin-bottom: 1rem;">
+            <button id="analyzeDbButton" style="background-color: #003366; color: white; padding: 0.5rem 1rem; font-size: 1rem; border: none; border-radius: 0; cursor: pointer;">
+                Analyze Database Queries
+            </button>
+        </div>
+        
+        <!-- 结果?-->
+        <div id="diagnosticReport">
+            <h2>Diagnostic Report</h2>
+            <div id="reportContent"></div>
+        </div>
+        
+        <!-- 权威综述 -->
+        <section style="margin-top: 4rem; padding: 2rem; background-color: white;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #003366;">Why Modern SaaS Architectures (Next.js + Supabase) Need Fine-Grained Database Auditing</h2>
+            <p style="margin-bottom: 1.5rem;">In the era of serverless computing and edge functions, database performance has become a critical bottleneck for modern SaaS applications. The combination of Next.js and Supabase has revolutionized how developers build and deploy applications, but it has also introduced new challenges in database management.</p>
+            <p style="margin-bottom: 1.5rem;">Next.js App Router's server components and route handlers create a high-demand environment for database connections, while Supabase's managed PostgreSQL instances require careful monitoring to avoid performance issues. Traditional database auditing approaches are no longer sufficient for these modern architectures.</p>
+            <p style="margin-bottom: 1.5rem;">One of the key challenges is connection pooling. In a serverless environment, each function invocation can create a new database connection, leading to connection exhaustion if not properly managed. Postgres Surgeon addresses this by providing real-time analysis of connection patterns and suggesting optimal pooling strategies.</p>
+            <p style="margin-bottom: 1.5rem;">Another critical issue is index optimization. As applications scale, inefficient queries can quickly become a performance bottleneck. Postgres Surgeon's ability to analyze EXPLAIN plans and automatically suggest index improvements is essential for maintaining performance as user bases grow.</p>
+            <p style="margin-bottom: 1.5rem;">Furthermore, the rise of vector databases and embeddings in modern applications adds another layer of complexity. Postgres Surgeon's specialized analysis for pgvector indexes ensures that AI-powered features don't compromise database performance.</p>
+            <p style="margin-bottom: 1.5rem;">In conclusion, modern SaaS architectures require a new approach to database auditing—one that is specifically designed for the unique challenges of serverless environments, edge computing, and AI integration. Postgres Surgeon fills this gap by providing comprehensive analysis and actionable insights tailored to Next.js and Supabase applications.</p>
+        </section>
+        
+        <!-- 对比技术表 -->
+        <section style="margin-top: 4rem; padding: 2rem; background-color: white;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #003366;">Technology Comparison</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
+                <thead>
+                    <tr style="background-color: #f4f4f4;">
+                        <th style="border: 2px solid #003366; padding: 1rem; text-align: left;">Approach</th>
+                        <th style="border: 2px solid #003366; padding: 1rem; text-align: left;">Cost</th>
+                        <th style="border: 2px solid #003366; padding: 1rem; text-align: left;">Speed</th>
+                        <th style="border: 2px solid #003366; padding: 1rem; text-align: left;">Accuracy</th>
+                        <th style="border: 2px solid #003366; padding: 1rem; text-align: left;">Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 2px solid #003366; padding: 1rem; font-weight: bold;">Manual Debugging</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Low (free)</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Very Slow</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Variable</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">?Requires deep expertise<br>?Time-consuming<br>?Error-prone</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 2px solid #003366; padding: 1rem; font-weight: bold;">Traditional Monitoring (DataDog/NewRelic)</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">High ($$$)</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Medium</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Good</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">?Comprehensive monitoring<br>?Alerting systems<br>?General-purpose</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 2px solid #003366; padding: 1rem; font-weight: bold;">Postgres Surgeon</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Low (free tier)</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Fast</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">Excellent</td>
+                        <td style="border: 2px solid #003366; padding: 1rem;">?Specialized for Postgres<br>?Real-time analysis<br>?Actionable recommendations<br>?Next.js & Supabase optimized</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- FAQ 专家?-->
+        <section style="margin-top: 4rem; padding: 2rem; background-color: white;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #003366;">Expert FAQ: Postgres Performance Tuning</h2>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">1. What is the most common cause of Postgres performance issues in Next.js applications?</summary>
+                <p style="margin-top: 1rem;">The most common cause is inefficient connection management. In serverless environments, each function invocation can create a new database connection, leading to connection exhaustion. Using a connection pooler like PgBouncer and implementing proper connection reuse strategies can significantly improve performance.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">2. How do I identify slow queries in my Supabase database?</summary>
+                <p style="margin-top: 1rem;">You can use the pg_stat_statements extension to identify slow queries. This extension tracks execution statistics for all SQL statements executed by the server. Additionally, Postgres Surgeon can automatically analyze your EXPLAIN plans to identify performance bottlenecks.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">3. What's the difference between B-tree and GIN indexes, and when should I use each?</summary>
+                <p style="margin-top: 1rem;">B-tree indexes are best for equality and range queries, while GIN indexes are optimized for full-text search and JSONB data. For example, use B-tree indexes for columns frequently used in WHERE clauses with equality conditions, and GIN indexes for columns containing JSONB data or text that needs to be searched.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">4. How can I optimize Postgres for read-heavy applications?</summary>
+                <p style="margin-top: 1rem;">For read-heavy applications, consider implementing materialized views, using proper indexing strategies, and configuring Postgres with appropriate shared_buffers and work_mem settings. Additionally, consider using a read replica to offload read queries from the primary database.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">5. What is index bloat, and how do I fix it?</summary>
+                <p style="margin-top: 1rem;">Index bloat occurs when indexes become fragmented due to frequent updates and deletes. You can fix it by running VACUUM ANALYZE to reclaim space and update statistics, or by rebuilding indexes with REINDEX CONCURRENTLY to avoid blocking writes.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">6. How do I choose between UUID and serial primary keys?</summary>
+                <p style="margin-top: 1rem;">UUIDs provide better uniqueness and are ideal for distributed systems, but can cause index fragmentation. Serial keys are more efficient for indexing but may not be suitable for distributed environments. Consider using UUIDv7 for a balance of uniqueness and performance.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">7. What are the best practices for Postgres in serverless environments?</summary>
+                <p style="margin-top: 1rem;">Best practices include using connection pooling, minimizing connection time, using prepared statements, and implementing exponential backoff for retries. Additionally, consider using Supabase's connection pooler (port 6543) for better performance in serverless environments.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">8. How do I monitor Postgres performance in production?</summary>
+                <p style="margin-top: 1rem;">Monitor key metrics like query execution time, connection count, buffer cache hit ratio, and vacuum activity. Use tools like pg_stat_statements, pg_stat_activity, and Postgres Surgeon to identify performance issues and optimize your database.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">9. What is the impact of RLS (Row Level Security) on Postgres performance?</summary>
+                <p style="margin-top: 1rem;">RLS can impact performance if not properly optimized. Ensure you have appropriate indexes for the conditions in your RLS policies, and consider using partial indexes to optimize queries that frequently access rows filtered by RLS policies.</p>
+            </details>
+            
+            <details style="margin-bottom: 1rem; border: 2px solid #003366; padding: 1rem;">
+                <summary style="font-weight: bold; cursor: pointer;">10. How do I optimize Postgres for pgvector (vector embeddings)?</summary>
+                <p style="margin-top: 1rem;">For pgvector, use appropriate index types (HNSW for small datasets, IVFFlat for larger ones), set optimal index parameters, and consider pre-filtering data before performing vector similarity searches. Additionally, monitor and tune memory settings to accommodate the additional memory requirements of vector operations.</p>
+            </details>
+        </section>
+    </div>
+    
+    <!-- FAQPage Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the most common cause of Postgres performance issues in Next.js applications?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most common cause is inefficient connection management. In serverless environments, each function invocation can create a new database connection, leading to connection exhaustion. Using a connection pooler like PgBouncer and implementing proper connection reuse strategies can significantly improve performance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I identify slow queries in my Supabase database?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can use the pg_stat_statements extension to identify slow queries. This extension tracks execution statistics for all SQL statements executed by the server. Additionally, Postgres Surgeon can automatically analyze your EXPLAIN plans to identify performance bottlenecks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between B-tree and GIN indexes, and when should I use each?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "B-tree indexes are best for equality and range queries, while GIN indexes are optimized for full-text search and JSONB data. For example, use B-tree indexes for columns frequently used in WHERE clauses with equality conditions, and GIN indexes for columns containing JSONB data or text that needs to be searched."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I optimize Postgres for read-heavy applications?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For read-heavy applications, consider implementing materialized views, using proper indexing strategies, and configuring Postgres with appropriate shared_buffers and work_mem settings. Additionally, consider using a read replica to offload read queries from the primary database."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is index bloat, and how do I fix it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Index bloat occurs when indexes become fragmented due to frequent updates and deletes. You can fix it by running VACUUM ANALYZE to reclaim space and update statistics, or by rebuilding indexes with REINDEX CONCURRENTLY to avoid blocking writes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I choose between UUID and serial primary keys?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "UUIDs provide better uniqueness and are ideal for distributed systems, but can cause index fragmentation. Serial keys are more efficient for indexing but may not be suitable for distributed environments. Consider using UUIDv7 for a balance of uniqueness and performance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the best practices for Postgres in serverless environments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Best practices include using connection pooling, minimizing connection time, using prepared statements, and implementing exponential backoff for retries. Additionally, consider using Supabase's connection pooler (port 6543) for better performance in serverless environments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I monitor Postgres performance in production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Monitor key metrics like query execution time, connection count, buffer cache hit ratio, and vacuum activity. Use tools like pg_stat_statements, pg_stat_activity, and Postgres Surgeon to identify performance issues and optimize your database."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the impact of RLS (Row Level Security) on Postgres performance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RLS can impact performance if not properly optimized. Ensure you have appropriate indexes for the conditions in your RLS policies, and consider using partial indexes to optimize queries that frequently access rows filtered by RLS policies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I optimize Postgres for pgvector (vector embeddings)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For pgvector, use appropriate index types (HNSW for small datasets, IVFFlat for larger ones), set optimal index parameters, and consider pre-filtering data before performing vector similarity searches. Additionally, monitor and tune memory settings to accommodate the additional memory requirements of vector operations."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <script>
+        // pg-surgeon 核心解析引擎
+        function parseExplainJson(explainJson) {
+            try {
+                const plan = JSON.parse(explainJson);
+                return plan[0].Plan;
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        // 计算每个节点?exclusive time
+        function calculateExclusiveTime(plan) {
+            if (!plan) return null;
+            
+            function processNode(node) {
+                let totalChildTime = 0;
+                if (node.Plans && node.Plans.length > 0) {
+                    node.Plans.forEach(child => {
+                        processNode(child);
+                        totalChildTime += child.exclusiveTime || 0;
+                    });
+                }
+                
+                node.exclusiveTime = (node['Actual Total Time'] || 0) - totalChildTime;
+                return node;
+            }
+            
+            return processNode(plan);
+        }
+        
+        // 生成树状结构 HTML
+        function generateTreeHTML(plan, maxExclusiveTime) {
+            if (!plan) return '';
+            
+            function createNodeHTML(node, level) {
+                const isSeqScan = node['Node Type'] === 'Seq Scan';
+                const nodeClass = isSeqScan ? 'tree-node seq-scan' : 'tree-node';
+                
+                // 计算颜色强度（耗时越长越红?
+                const intensity = Math.min(1, (node.exclusiveTime || 0) / (maxExclusiveTime || 1));
+                const red = Math.floor(239 * intensity);
+                const green = Math.floor(249 * (1 - intensity));
+                const blue = Math.floor(249 * (1 - intensity));
+                const bgColor = `rgba(${red}, ${green}, ${blue}, 0.1)`;
+                
+                let html = `
+                    <div class="${nodeClass}" style="background-color: ${bgColor};">
+                        <div class="tree-node-content">
+                            <div>
+                                <span class="node-type">${node['Node Type']}</span>
+                                ${node['Relation Name'] ? `<span>on ${node['Relation Name']}</span>` : ''}
+                            </div>
+                            <div class="node-stats">
+                                <span class="node-time">${(node.exclusiveTime || 0).toFixed(2)}ms</span>
+                                ${node['Actual Rows'] ? ` | Rows: ${node['Actual Rows']}` : ''}
+                            </div>
+                        </div>
+                `;
+                
+                if (node.Plans && node.Plans.length > 0) {
+                    html += '<div class="tree-node-children">';
+                    node.Plans.forEach(child => {
+                        html += createNodeHTML(child, level + 1);
+                    });
+                    html += '</div>';
+                }
+                
+                html += '</div>';
+                return html;
+            }
+            
+            return createNodeHTML(plan, 0);
+        }
+        
+        // 提取表名和可能需要索引的?
+        function extractTableInfo(plan) {
+            const tables = new Set();
+            
+            function processNode(node) {
+                if (node['Relation Name']) {
+                    tables.add(node['Relation Name']);
+                }
+                
+                if (node.Plans && node.Plans.length > 0) {
+                    node.Plans.forEach(child => {
+                        processNode(child);
+                    });
+                }
+            }
+            
+            processNode(plan);
+            return Array.from(tables);
+        }
+        
+        // 生成索引建议
+        function generateIndexSuggestions(tables) {
+            if (!tables || tables.length === 0) return '';
+            
+            let suggestions = '<div class="suggestion-box">';
+            suggestions += '<h3>Index Suggestions</h3>';
+            suggestions += '<p>Consider adding the following indexes to improve performance:</p>';
+            suggestions += '<pre>';
+            
+            tables.forEach(table => {
+                suggestions += `-- Add index for ${table}\n`;
+                suggestions += `CREATE INDEX CONCURRENTLY idx_${table.toLowerCase()}_id ON ${table}(id);\n\n`;
+            });
+            
+            suggestions += '</pre>';
+            suggestions += '</div>';
+            return suggestions;
+        }
+        
+        // 找到耗时最长的节点
+        function findSlowestNode(plan) {
+            let slowestNode = null;
+            let maxTime = 0;
+            
+            function processNode(node) {
+                if ((node.exclusiveTime || 0) > maxTime) {
+                    maxTime = node.exclusiveTime;
+                    slowestNode = node;
+                }
+                
+                if (node.Plans && node.Plans.length > 0) {
+                    node.Plans.forEach(child => {
+                        processNode(child);
+                    });
+                }
+            }
+            
+            processNode(plan);
+            return { slowestNode, maxTime };
+        }
+        
+        // 诊断逻辑
+        document.getElementById('runSurgeryButton').addEventListener('click', function() {
+            const input = document.getElementById('sqlInput').value;
+            const report = document.getElementById('diagnosticReport');
+            const reportContent = document.getElementById('reportContent');
+            
+            if (input.trim() === '') {
+                reportContent.innerHTML = '<p style="color: #ef4444;">Please enter SQL statement or EXPLAIN ANALYZE result</p>';
+                report.style.display = 'block';
+                return;
+            }
+            
+            // 尝试解析 EXPLAIN JSON 结果
+            const plan = parseExplainJson(input);
+            
+            if (plan) {
+                // 计算 exclusive time
+                const processedPlan = calculateExclusiveTime(plan);
+                
+                // 找到耗时最长的节点
+                const { slowestNode, maxTime } = findSlowestNode(processedPlan);
+                
+                // 生成树状结构
+                const treeHTML = generateTreeHTML(processedPlan, maxTime);
+                
+                // 提取表信息并生成索引建议
+                const tables = extractTableInfo(processedPlan);
+                const indexSuggestions = generateIndexSuggestions(tables);
+                
+                // 生成报告
+                let reportHTML = '<h2>Query Plan Analysis</h2>';
+                reportHTML += '<p>Below is the hierarchical tree structure of your query plan, with nodes colored by their exclusive execution time (redder = slower):</p>';
+                reportHTML += treeHTML;
+                
+                if (slowestNode) {
+                    reportHTML += `<div style="margin-top: 1rem; padding: 1rem; background-color: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444;">`;
+                    reportHTML += `<h3>Slowest Node</h3>`;
+                    reportHTML += `<p><strong>Node Type:</strong> ${slowestNode['Node Type']}</p>`;
+                    reportHTML += `<p><strong>Table:</strong> ${slowestNode['Relation Name'] || 'N/A'}</p>`;
+                    reportHTML += `<p><strong>Exclusive Time:</strong> ${slowestNode.exclusiveTime.toFixed(2)}ms</p>`;
+                    reportHTML += `</div>`;
+                }
+                
+                reportHTML += indexSuggestions;
+                reportHTML += `
+                    <div style="margin-top: 1rem; padding: 1rem; background-color: #f0f9ff; border-left: 4px solid #3b82f6;">
+                        <h3>Premium Features</h3>
+                        <p>Upgrade to premium ($9.9/year) for advanced features:</p>
+                        <ul>
+                            <li>Monitoring Bot: Automated GitHub Action for SQL changes</li>
+                            <li>Performance Weekly Report: Automatic production database scans</li>
+                            <li>One-click Optimization: Advanced rewrite suggestions for complex joins</li>
+                        </ul>
+                        <button id="upgradeButton" style="background-color: #3b82f6; color: white; padding: 0.5rem 1rem; font-size: 0.875rem; border: none; border-radius: 0; cursor: pointer; margin-top: 1rem;">
+                            Upgrade to Premium
+                        </button>
+                    </div>
+                `;
+                reportContent.innerHTML = reportHTML;
+                
+                // 添加升级按钮事件监听?
+                document.getElementById('upgradeButton').addEventListener('click', function() {
+                    alert('Thank you for your interest in Premium! This feature is coming soon.');
+                });
+            } else {
+                // 回退到原有诊断逻辑
+                const results = [];
+                
+                // 规则 1：连接池风险 (Supabase 专向)
+                const maxConnectionsMatch = input.match(/max_connections\s*=\s*(\d+)/i);
+                if (maxConnectionsMatch) {
+                    const maxConnections = parseInt(maxConnectionsMatch[1]);
+                    if (maxConnections < 100) {
+                        results.push({
+                            type: 'Performance Bottleneck',
+                            color: '#f59e0b',
+                            message: 'Direct connection detected. In Next.js Serverless environment, this will lead to connection exhaustion.',
+                            suggestion: 'Please switch to Transaction mode connection pool address (port 6543).'
+                        });
+                    }
+                }
+                
+                // 规则 2：外键索引缺?
+                const foreignKeyMatch = input.match(/(FOREIGN KEY|REFERENCES)/i);
+                const createIndexMatch = input.match(/CREATE INDEX/i);
+                if (foreignKeyMatch && !createIndexMatch) {
+                    results.push({
+                            type: 'Critical Error',
+                            color: '#ef4444',
+                            message: 'Foreign key not indexed! This will cause full table scan during cascading delete, even locking the entire database.',
+                            suggestion: 'Add CREATE INDEX CONCURRENTLY statement for this field.'
+                        });
+                }
+                
+                // 规则 3：UUID 性能陷阱
+                const uuidPrimaryKeyMatch = input.match(/UUID.*PRIMARY KEY/i) || input.match(/PRIMARY KEY.*UUID/i);
+                if (uuidPrimaryKeyMatch) {
+                    results.push({
+                            type: 'Performance Bottleneck',
+                            color: '#f59e0b',
+                            message: 'Random UUIDv4 as primary key causes severe index fragmentation.',
+                            suggestion: 'In Supabase/Postgres, it is recommended to use UUIDv7 or sequence with time prefix.'
+                        });
+                }
+                
+                // 规则 4：通配符查询风?
+                if (input.match(/SELECT\s+\*/i)) {
+                    results.push({
+                        type: 'Best Practice',
+                        color: '#3b82f6',
+                        message: 'SELECT * is strictly prohibited in production environment. This increases network IO and breaks covering indexes.',
+                        suggestion: 'Explicitly list the required field names.'
+                    });
+                }
+                
+                // 规则 5：缺少自动更新时间戳
+                const tableNameMatch = input.match(/CREATE TABLE\s+(\w+)/i);
+                if (tableNameMatch) {
+                    const tableName = tableNameMatch[1].toLowerCase();
+                    if ((tableName.includes('users') || tableName.includes('orders')) && !input.match(/updated_at/i)) {
+                        results.push({
+                            type: 'Best Practice',
+                            color: '#3b82f6',
+                            message: 'Missing audit trail. You cannot track when data was tampered with.',
+                            suggestion: 'Add updated_at field and attach trigger.'
+                        });
+                    }
+                }
+                
+                // 规则 6：EXPLAIN 计划 - 全表扫描
+                if (input.includes('Seq Scan')) {
+                    results.push({
+                        type: 'Critical Error',
+                        color: '#ef4444',
+                        message: 'Sequential Scan detected! Your query is ignoring indexes, which will directly drag down CPU as data volume grows.',
+                        suggestion: 'Add appropriate indexes for query conditions, or rewrite query to use existing indexes.'
+                    });
+                }
+                
+                // 规则 7：EXPLAIN 计划 - 高查询成?
+                const costMatch = input.match(/Cost:\s*(\d+\.\d+)/i);
+                if (costMatch) {
+                    const cost = parseFloat(costMatch[1]);
+                    if (cost > 1000.00) {
+                        results.push({
+                        type: 'Performance Bottleneck',
+                        color: '#f59e0b',
+                        message: 'Query cost is too high, consider partitioning or rewriting subqueries.',
+                        suggestion: 'Consider partitioning large tables or rewriting complex subqueries to improve performance.'
+                    });
+                    }
+                }
+                
+                // 生成诊断报告
+                if (results.length === 0) {
+                    reportContent.innerHTML = '<p style="color: #10b981;">Diagnosis completed! No issues found.</p>';
+                } else {
+                    let reportHTML = '';
+                    results.forEach((result) => {
+                        reportHTML += `
+                            <div style="margin-bottom: 1rem; padding: 1rem; border-left: 4px solid ${result.color};">
+                                <h3 style="margin: 0 0 0.5rem 0; font-size: 1.125rem; color: ${result.color};">${result.type}</h3>
+                                <p style="margin: 0 0 0.5rem 0;">${result.message}</p>
+                                <p style="margin: 0; font-style: italic;">Fix suggestion: ${result.suggestion}</p>
+                            </div>
+                        `;
+                    });
+                    
+                    reportHTML += `
+                        <div style="margin-top: 1rem; padding: 1rem; background-color: #f0f9ff; border-left: 4px solid #3b82f6;">
+                            <h3>Premium Features</h3>
+                            <p>Upgrade to premium ($9.9/year) for advanced features:</p>
+                            <ul>
+                                <li>Monitoring Bot: Automated GitHub Action for SQL changes</li>
+                                <li>Performance Weekly Report: Automatic production database scans</li>
+                                <li>One-click Optimization: Advanced rewrite suggestions for complex joins</li>
+                            </ul>
+                            <button id="upgradeButton" style="background-color: #3b82f6; color: white; padding: 0.5rem 1rem; font-size: 0.875rem; border: none; border-radius: 0; cursor: pointer; margin-top: 1rem;">
+                                Upgrade to Premium
+                            </button>
+                        </div>
+                    `;
+                    reportContent.innerHTML = reportHTML;
+                    
+                    // 添加升级按钮事件监听?
+                    document.getElementById('upgradeButton').addEventListener('click', function() {
+                        alert('Thank you for your interest in Premium! This feature is coming soon.');
+                    });
+                }
+            }
+            
+            report.style.display = 'block';
+        });
+        
+        // 升级按钮事件监听?
+        document.getElementById('upgradeButton').addEventListener('click', function() {
+            alert('Thank you for your interest in Premium! This feature is coming soon.');
+        });
+        
+        // 数据库查询分析功?
+        document.getElementById('analyzeDbButton').addEventListener('click', function() {
+            const dbUrl = document.getElementById('dbUrl').value;
+            const report = document.getElementById('diagnosticReport');
+            const reportContent = document.getElementById('reportContent');
+            
+            if (!dbUrl) {
+                reportContent.innerHTML = '<p style="color: #ef4444;">Please enter database URL</p>';
+                report.style.display = 'block';
+                return;
+            }
+            
+            // 显示运行脚本的说?
+            reportContent.innerHTML = `
+                <div style="background-color: #f0f9ff; padding: 1rem; border-left: 4px solid #3b82f6;">
+                    <h3>Run Database Analysis</h3>
+                    <p>To analyze your database queries, please run the following command in your terminal:</p>
+                    <pre style="background-color: #f8fafc; padding: 0.5rem; overflow-x: auto; border: 1px solid #e2e8f0;">
+# First, install dependencies (if not already installed)
+npm install pg
+
+# Then run the analysis script
+node analyze-queries.js "${dbUrl}"
+                    </pre>
+                    <p>After running the script, paste the JSON output below and click "Visualize Results":</p>
+                    <textarea id="queryResults" placeholder="Paste JSON output here..." style="width: 100%; height: 200px; padding: 0.5rem; border: 2px solid #003366; border-radius: 0; box-sizing: border-box; margin-bottom: 1rem;"></textarea>
+                    <button id="visualizeButton" style="background-color: #003366; color: white; padding: 0.5rem 1rem; font-size: 1rem; border: none; border-radius: 0; cursor: pointer;">
+                        Visualize Results
+                    </button>
+                </div>
+            `;
+            
+            report.style.display = 'block';
+            
+            // 添加可视化按钮的事件监听?
+            document.getElementById('visualizeButton').addEventListener('click', function() {
+                const queryResults = document.getElementById('queryResults').value;
+                
+                if (!queryResults) {
+                    reportContent.innerHTML = '<p style="color: #ef4444;">Please paste JSON output</p>';
+                    return;
+                }
+                
+                try {
+                    const queries = JSON.parse(queryResults);
+                    visualizeQueryResults(queries);
+                } catch (error) {
+                    reportContent.innerHTML = '<p style="color: #ef4444;">Invalid JSON format. Please paste the exact output from the script.</p>';
+                }
+            });
+        });
+        
+        // 可视化查询结?
+        function visualizeQueryResults(queries) {
+            const reportContent = document.getElementById('reportContent');
+            
+            let html = '<h2>Database Query Analysis</h2>';
+            html += '<p>Below are the top 5 slowest queries in your database:</p>';
+            
+            queries.forEach((query, index) => {
+                html += `
+                    <div style="margin-bottom: 2rem; padding: 1rem; border: 1px solid #e2e8f0;">
+                        <h3>Query #${index + 1}</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Mean Execution Time:</strong> ${query.mean_exec_time.toFixed(2)}ms<br>
+                            <strong>Calls:</strong> ${query.calls}<br>
+                            <strong>Total Execution Time:</strong> ${query.total_exec_time.toFixed(2)}ms<br>
+                            <strong>Rows:</strong> ${query.rows}
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Query:</strong>
+                            <pre style="background-color: #f8fafc; padding: 0.5rem; overflow-x: auto; border: 1px solid #e2e8f0;">${query.query}</pre>
+                        </div>
+                        <div style="background-color: #f0f9ff; padding: 1rem; border-left: 4px solid #3b82f6;">
+                            <strong>Suggestions:</strong>
+                            <ul>
+                                ${query.suggestions.map(suggestion => `<li>${suggestion}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            reportContent.innerHTML = html;
+        }
+    </script>
+
+
+
+    
+    <!-- 页脚 -->
+    <footer style="margin-top: 4rem; padding: 2rem 0; border-top: 2px solid #e2e8f0; font-size: 0.875rem;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
+            <a href="https://www.wangdadi.xyz" style="color: #3b82f6; text-decoration: none;">home</a>
+            <a href="https://postgressurgeon.wangdadi.xyz" style="color: #3b82f6; text-decoration: none;">postgressurgeon</a>
+            <a href="all-topics.html" style="color: #3b82f6; text-decoration: none;">All Topics</a>
+            <span>Support: 457239850@qq.com</span>
+            <a href="sitemap.html" style="color: #3b82f6; text-decoration: none;">sitemap</a>
+        </div>
+    </footer>
+</body>
+</html>
