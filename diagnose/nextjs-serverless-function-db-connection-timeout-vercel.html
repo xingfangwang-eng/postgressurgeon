@@ -28,7 +28,7 @@
             letter-spacing: -0.02em;
         }
         
-        /* 顶部导航 */
+        /* Top Navigation */
         header {
             margin-bottom: 2rem;
         }
@@ -58,7 +58,7 @@
             margin-bottom: 1.5rem;
         }
         
-        /* 核心输入?*/
+        /* Core Input*/
         .input-container {
             background-color: white;
             padding: 1.5rem;
@@ -76,7 +76,7 @@
             box-sizing: border-box;
         }
         
-        /* 操作?*/
+        /* Operation*/
         .button-container {
             margin-bottom: 1.5rem;
         }
@@ -97,14 +97,14 @@
             background-color: #002244;
         }
         
-        /* 结果?*/
+        /* Result*/
         #diagnosticReport {
             background-color: white;
             padding: 1.5rem;
             display: none;
         }
         
-        /* 响应式设?*/
+        /* Responsive Design*/
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -149,20 +149,21 @@
     
 
     <div class="container">
-        <!-- 顶部导航 -->
+        <!-- Top Navigation -->
         <header>
+            <!-- Breadcrumb Navigation -->
+            <div style="margin-bottom: 2rem; font-size: 0.875rem;">
+                <a href="../index.html" style="color: #3b82f6; text-decoration: none;">Home</a> &gt; <a href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">All Topics</a> &gt; <span style="color: #003366; font-weight: bold;">Vercel DB Timeouts: Solving the Serverless Connection Puzzle</span>
+            </div>
             <nav>
                 <h1 class="swiss-font">Postgres Surgeon</h1>
                 <p>Production-grade DB Audit for Supabase & Next.js</p>
             </nav>
-            <!-- 面包屑导?-->
-            <div style="margin-bottom: 2rem; font-size: 0.875rem;">
-                <a href="../index.html" style="color: #3b82f6; text-decoration: none;">Home</a> &gt; <a href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">All Topics</a> &gt; <span style="color: #003366; font-weight: bold;">Vercel DB Timeouts: Solving the Serverless Connection Puzzle</span>
-            </div>
+            
             <h2>Vercel DB Timeouts: Solving the Serverless Connection Puzzle</h2>
         </header>
         
-        <!-- 内容区域 -->
+        <!-- Content Area -->
         <article class="content">
             <section>
                 <p><strong>Query Scenario:</strong> Functions are timing out at 10s because the DB connection pool is saturated.</p>
@@ -171,7 +172,7 @@
                 <p><strong>Tone:</strong> Practical</p>
             </section>
             
-        <!-- 交互式计算器 -->
+        <!-- Interactive Calculator -->
         <section class="input-container">
             <h2>Interactive Calculator</h2>
             <div id="calculator">
@@ -217,12 +218,12 @@
             </div>
         </section>
         
-        <!-- 核心输入?-->
+        <!-- Core Input-->
         <section class="input-container">
             <textarea id="sqlInput" placeholder="Paste your CREATE TABLE statement or EXPLAIN ANALYZE result..."></textarea>
         </section>
         
-        <!-- 操作?-->
+        <!-- Operation-->
         <section class="button-container">
             <button>Run Surgery</button>
         </section>
@@ -462,47 +463,21 @@ with Session() as session:
             </div>
         </section>
         
-        <!-- 结果?-->
+        <!-- Result-->
         <section id="diagnosticReport">
             <h2>Diagnostic Report</h2>
             <div id="reportContent"></div>
         </section>
         
-        <!-- 内部链接?-->
-        <section class="input-container">
-            <h2>Related Diagnostics</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                
-        <a href="postgres-surgical-audit-of-schema-anti-patterns.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Your Schema Sucks: 10 Postgres Anti-Patterns You Need to Fix Now
-        </a>
         
-        <a href="check-postgres-connections-by-user-supabase.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Who's Stealing Your Connections? Audit PG Connections by User
-        </a>
         
-        <a href="postgres-count-slow-on-large-table-supabase.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Stop Using COUNT(*): Faster Ways to Count 1M+ Rows in Postgres
-        </a>
-        
-        <a href="supabase-postgrest-vs-direct-pg-connection.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Supabase API or Direct SQL? Latency and Performance Comparison
-        </a>
-        
-        <a href="supabase-pgvector-index-build-taking-too-long.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Stuck on 'Building Index'? Speed Up pgvector HNSW Index Creation
-        </a>
-        
-            </div>
-        </section>
-        
-        <!-- 底部 -->
+        <!-- Footer -->
         <footer>
         </footer>
     </div>
     
     <script>
-        // 诊断逻辑
+        // Diagnostic Logic
         document.querySelector('button').addEventListener('click', function() {
             const input = document.getElementById('sqlInput').value;
             const report = document.getElementById('diagnosticReport');
@@ -517,9 +492,9 @@ with Session() as session:
             report.style.display = 'block';
         });
         
-        // 计算器逻辑
+        // Calculator Logic
         
-            // 连接池计算器逻辑
+            // 连接池Calculator Logic
             function calculatePoolSize() {
                 const concurrentUsers = parseInt(document.getElementById('concurrentUsers').value) || 0;
                 const queryTime = parseInt(document.getElementById('queryTime').value) || 0;
@@ -543,41 +518,17 @@ with Session() as session:
                 document.getElementById('recommendationResult').textContent = recommendation;
             }
             
-            // 实时计算
+            // Real-time Calculation
             document.getElementById('concurrentUsers').addEventListener('input', calculatePoolSize);
             document.getElementById('queryTime').addEventListener('input', calculatePoolSize);
             document.getElementById('idleTime').addEventListener('input', calculatePoolSize);
             
-            // 初始计算
+            // Initial Calculation
             calculatePoolSize();
         
     </script>
 
-    <!-- 底部面包屑导?-->
-    <nav style="margin-top: 4rem; padding-top: 2rem; border-top: 2px solid #e2e8f0; font-size: 0.875rem;">
-        <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; padding: 0;">
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <a itemprop="item" href="../index.html" style="color: #3b82f6; text-decoration: none;">
-                    <span itemprop="name">Home</span>
-                </a>
-                <meta itemprop="position" content="1" />
-                <span style="margin: 0 0.5rem;">/</span>
-            </li>
-            
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <a itemprop="item" href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">
-                    <span itemprop="name">All Tools</span>
-                </a>
-                <meta itemprop="position" content="2" />
-                <span style="margin: 0 0.5rem;">/</span>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <span itemprop="name">nextjs-serverless-function-db-connection-timeout-vercel</span>
-                <meta itemprop="position" content="3" />
-            </li>
-        
-        </ol>
-    </nav>
+    
 
     
     <!-- 页脚 -->

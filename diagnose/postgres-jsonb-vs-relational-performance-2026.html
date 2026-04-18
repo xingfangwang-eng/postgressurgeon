@@ -28,7 +28,7 @@
             letter-spacing: -0.02em;
         }
         
-        /* 顶部导航 */
+        /* Top Navigation */
         header {
             margin-bottom: 2rem;
         }
@@ -58,7 +58,7 @@
             margin-bottom: 1.5rem;
         }
         
-        /* 核心输入?*/
+        /* Core Input*/
         .input-container {
             background-color: white;
             padding: 1.5rem;
@@ -76,7 +76,7 @@
             box-sizing: border-box;
         }
         
-        /* 操作?*/
+        /* Operation*/
         .button-container {
             margin-bottom: 1.5rem;
         }
@@ -97,14 +97,14 @@
             background-color: #002244;
         }
         
-        /* 结果?*/
+        /* Result*/
         #diagnosticReport {
             background-color: white;
             padding: 1.5rem;
             display: none;
         }
         
-        /* 响应式设?*/
+        /* Responsive Design*/
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -149,20 +149,21 @@
     
 
     <div class="container">
-        <!-- 顶部导航 -->
+        <!-- Top Navigation -->
         <header>
+            <!-- Breadcrumb Navigation -->
+            <div style="margin-bottom: 2rem; font-size: 0.875rem;">
+                <a href="../index.html" style="color: #3b82f6; text-decoration: none;">Home</a> &gt; <a href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">All Topics</a> &gt; <span style="color: #003366; font-weight: bold;">JSONB or Columns? The Brutal Truth About Postgres Document Storage Performance</span>
+            </div>
             <nav>
                 <h1 class="swiss-font">Postgres Surgeon</h1>
                 <p>Production-grade DB Audit for Supabase & Next.js</p>
             </nav>
-            <!-- 面包屑导?-->
-            <div style="margin-bottom: 2rem; font-size: 0.875rem;">
-                <a href="../index.html" style="color: #3b82f6; text-decoration: none;">Home</a> &gt; <a href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">All Topics</a> &gt; <span style="color: #003366; font-weight: bold;">JSONB or Columns? The Brutal Truth About Postgres Document Storage Performance</span>
-            </div>
+            
             <h2>JSONB or Columns? The Brutal Truth About Postgres Document Storage Performance</h2>
         </header>
         
-        <!-- 内容区域 -->
+        <!-- Content Area -->
         <article class="content">
             <section>
                 <p><strong>Query Scenario:</strong> Indie dev is overusing JSONB and now queries are impossible to optimize.</p>
@@ -171,7 +172,7 @@
                 <p><strong>Tone:</strong> Practical</p>
             </section>
             
-        <!-- 交互式计算器 -->
+        <!-- Interactive Calculator -->
         <section class="input-container">
             <h2>Interactive Calculator</h2>
             <div id="calculator">
@@ -212,12 +213,12 @@
             </div>
         </section>
         
-        <!-- 核心输入?-->
+        <!-- Core Input-->
         <section class="input-container">
             <textarea id="sqlInput" placeholder="Paste your CREATE TABLE statement or EXPLAIN ANALYZE result..."></textarea>
         </section>
         
-        <!-- 操作?-->
+        <!-- Operation-->
         <section class="button-container">
             <button>Run Surgery</button>
         </section>
@@ -349,25 +350,25 @@
                 
             <h3>SQL: EXPLAIN ANALYZE</h3>
             <pre style="background-color: #f4f4f4; padding: 1rem; overflow-x: auto; border: 4px solid #003366;">
--- 分析查询执行计划
+-- Analyze Query Execution Plan
 EXPLAIN ANALYZE
 SELECT * FROM users WHERE age > 30;
 
--- 优化后的查询
+-- Optimized Query
 EXPLAIN ANALYZE
 SELECT id, name, email FROM users WHERE age > 30;
             </pre>
         
-            <h3>Node.js/Next.js: 数据库操作优?/h3>
+            <h3>Node.js/Next.js: Database Operation Optimization/h3>
             <pre style="background-color: #f4f4f4; padding: 1rem; overflow-x: auto; border: 4px solid #003366;">
-// 优化前：多次查询
+// Before Optimization: Multiple Queries
 async function getUserWithOrders(userId) {
   const user = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
   const orders = await pool.query('SELECT * FROM orders WHERE user_id = $1', [userId]);
   return { ...user.rows[0], orders: orders.rows };
 }
 
-// 优化后：使用 JOIN
+// After Optimization: Using JOIN
 async function getUserWithOrders(userId) {
   const result = await pool.query('
     SELECT u.*, o.id as order_id, o.amount
@@ -478,47 +479,21 @@ users = session.execute(
             </div>
         </section>
         
-        <!-- 结果?-->
+        <!-- Result-->
         <section id="diagnosticReport">
             <h2>Diagnostic Report</h2>
             <div id="reportContent"></div>
         </section>
         
-        <!-- 内部链接?-->
-        <section class="input-container">
-            <h2>Related Diagnostics</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                
-        <a href="postgres-index-for-case-insensitive-search.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Lower() vs CITEXT: The Best Way to Index Case-Insensitive Search
-        </a>
         
-        <a href="postgres-trigger-vs-nextjs-middleware-performance.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Where Should Your Logic Live? Postgres Triggers vs Next.js Middleware
-        </a>
         
-        <a href="prisma-exhausted-postgres-connections-nextjs-app-router.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Stop Prisma from Killing Your Database: Surgical Connection Pooling for Next.js
-        </a>
-        
-        <a href="pgvector-hnsw-vs-ivfflat-for-small-datasets.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Choosing the Wrong Vector Index? HNSW vs IVFFlat for Indie AI Apps
-        </a>
-        
-        <a href="supabase-dashboard-sql-slow-logs-missing.html" style="display: inline-block; background-color: #f4f4f4; padding: 0.5rem 1rem; text-decoration: none; color: #003366; font-weight: bold;">
-            Can't Find Slow Queries in Supabase? Use This Surgery Script
-        </a>
-        
-            </div>
-        </section>
-        
-        <!-- 底部 -->
+        <!-- Footer -->
         <footer>
         </footer>
     </div>
     
     <script>
-        // 诊断逻辑
+        // Diagnostic Logic
         document.querySelector('button').addEventListener('click', function() {
             const input = document.getElementById('sqlInput').value;
             const report = document.getElementById('diagnosticReport');
@@ -533,9 +508,9 @@ users = session.execute(
             report.style.display = 'block';
         });
         
-        // 计算器逻辑
+        // Calculator Logic
         
-            // 转化率影响计算器逻辑
+            // 转化率影响Calculator Logic
             function calculateConversionImpact() {
                 const currentLatency = parseInt(document.getElementById('currentLatency').value) || 0;
                 const targetLatency = parseInt(document.getElementById('targetLatency').value) || 0;
@@ -550,40 +525,16 @@ users = session.execute(
                 document.getElementById('conversionImprovement').textContent = improvement.toFixed(1) + '%';
             }
             
-            // 实时计算
+            // Real-time Calculation
             document.getElementById('currentLatency').addEventListener('input', calculateConversionImpact);
             document.getElementById('targetLatency').addEventListener('input', calculateConversionImpact);
             
-            // 初始计算
+            // Initial Calculation
             calculateConversionImpact();
         
     </script>
 
-    <!-- 底部面包屑导?-->
-    <nav style="margin-top: 4rem; padding-top: 2rem; border-top: 2px solid #e2e8f0; font-size: 0.875rem;">
-        <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; padding: 0;">
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <a itemprop="item" href="../index.html" style="color: #3b82f6; text-decoration: none;">
-                    <span itemprop="name">Home</span>
-                </a>
-                <meta itemprop="position" content="1" />
-                <span style="margin: 0 0.5rem;">/</span>
-            </li>
-            
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <a itemprop="item" href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">
-                    <span itemprop="name">All Tools</span>
-                </a>
-                <meta itemprop="position" content="2" />
-                <span style="margin: 0 0.5rem;">/</span>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <span itemprop="name">postgres-jsonb-vs-relational-performance-2026</span>
-                <meta itemprop="position" content="3" />
-            </li>
-        
-        </ol>
-    </nav>
+    
 
     
     <!-- 页脚 -->

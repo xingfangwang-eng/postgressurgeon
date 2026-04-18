@@ -27,7 +27,7 @@
             letter-spacing: -0.02em;
         }
         
-        /* 顶部导航 */
+        /* Top Navigation */
         header {
             margin-bottom: 2rem;
         }
@@ -115,7 +115,7 @@
             text-decoration: underline;
         }
         
-        /* 响应式设?*/
+        /* Responsive Design*/
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -136,8 +136,12 @@
     
 
     <div class="container">
-        <!-- 顶部导航 -->
+        <!-- Top Navigation -->
         <header>
+            <!-- Breadcrumb Navigation -->
+            <div style="margin-bottom: 2rem; font-size: 0.875rem;">
+                <a href="../index.html" style="color: #3b82f6; text-decoration: none;">Home</a> &gt; <a href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">All Topics</a> &gt; <span style="color: #003366; font-weight: bold;">Postgres Surgeon - Diagnostic Center</span>
+            </div>
             <h1 class="swiss-font">Postgres Surgeon</h1>
             <p>Production-grade DB Audit for Supabase & Next.js</p>
             <h2>Diagnostic Center</h2>
@@ -239,31 +243,7 @@
         });
     </script>
 
-    <!-- 底部面包屑导?-->
-    <nav style="margin-top: 4rem; padding-top: 2rem; border-top: 2px solid #e2e8f0; font-size: 0.875rem;">
-        <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; padding: 0;">
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <a itemprop="item" href="../index.html" style="color: #3b82f6; text-decoration: none;">
-                    <span itemprop="name">Home</span>
-                </a>
-                <meta itemprop="position" content="1" />
-                <span style="margin: 0 0.5rem;">/</span>
-            </li>
-            
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <a itemprop="item" href="../all-topics.html" style="color: #3b82f6; text-decoration: none;">
-                    <span itemprop="name">All Tools</span>
-                </a>
-                <meta itemprop="position" content="2" />
-                <span style="margin: 0 0.5rem;">/</span>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: inline;">
-                <span itemprop="name">index</span>
-                <meta itemprop="position" content="3" />
-            </li>
-        
-        </ol>
-    </nav>
+    
 
     
     <!-- 页脚 -->
