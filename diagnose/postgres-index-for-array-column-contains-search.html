@@ -272,24 +272,7 @@
                         </div>
                     
                 
-    <blockquote style="background-color: #f4f4f4; border-left: 4px solid #003366; padding: 1.5rem; margin: 2rem 0;">
-        <p style="margin-bottom: 1rem;">Looking for more database performance optimization tips?</p>
-        <ul style="list-style: none; padding: 0;">
     
-            <li style="margin-bottom: 0.5rem;">
-                <a href="../index.html" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Try the Automated Postgres Surgeon</a>
-            </li>
-        
-            <li style="margin-bottom: 0.5rem;">
-                <a href="{{HOME_PATH}}" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Postgres query optimizer</a>
-            </li>
-        
-            <li style="margin-bottom: 0.5rem;">
-                <a href="{{HOME_PATH}}" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Audit your SQL now</a>
-            </li>
-        
-        </ul>
-    </blockquote>
     </section>
                 
                 <section>
@@ -316,14 +299,14 @@
                 <p>In San Francisco (US West), A SaaS company in San Francisco encountered connection pool exhaustion issues when using Supabase. By switching to transaction mode connection pool, their response time decreased from 500ms to 45ms. This shows that geographic location has a significant impact on database connection performance, especially when handling cross-region requests.</p>
                 <p>The average latency in this region is 12ms, and by optimizing postgres index for array column contains search, you can further reduce latency and improve user experience.</p>
                 
-                <!-- 90% 位置?CTA -->
+                <!-- 90% Position CTA -->
                 <div style="background-color: #f4f4f4; padding: 1rem; margin: 1rem 0;">
                     <a href="../index.html" style="display: inline-block; background-color: #003366; color: white; padding: 1rem 2rem; text-decoration: none; font-weight: bold;">Try Free SQL Diagnosis</a>
                 </div>
             </section>
         </article>
         
-        <!-- 多语言代码审计片段 -->
+        <!-- Multi-language Code Audit Snippets -->
         <section class="input-container">
             <h2>Multi-language Code Audit Snippets</h2>
             <div id="codeSnippets">
@@ -462,7 +445,44 @@ class User(Base):
         
         
         <!-- Footer -->
-        <footer>
+        
+    <div style="margin: 2rem 0; padding: 1.5rem; background-color: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <h3 style="margin-top: 0; color: #1e293b; font-size: 1.125rem; font-weight: 600;">Recommended Resources</h3>
+        <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+    
+            <li style="margin-bottom: 0.75rem;">
+                <a href="nextjs-pgrstquerytimeout-supabase-fix.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Fix: pgrst_query_timeout on Supabase and Next.js
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-surgical-check-for-redundant-constraints.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Performance Clean Up: Removing Redundant Postgres Constraints
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-find-longest-running-queries-script.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Find and Kill: The 10 Slowest Queries in Your Database Right Now
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="optimizing-postgres-for-read-heavy-nextjs-app.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Read-Heavy Next.js Apps: 5 Postgres Tweaks to 10x Your Throughput
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="supabase-trigger-function-vs-pgnet-performance.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Webhooks from Postgres: Native Triggers vs pg_net Performance
+                </a>
+            </li>
+        
+        </ul>
+    </div>
+    <footer>
         </footer>
     </div>
     
@@ -484,7 +504,7 @@ class User(Base):
         
         // Calculator Logic
         
-            // 性能优化效果Calculator Logic
+            // Performance Optimization效果Calculator Logic
             function calculatePerformanceImprovement() {
                 const currentTime = parseInt(document.getElementById('currentTime').value) || 0;
                 

@@ -292,24 +292,7 @@
                         </div>
                     
                 
-    <blockquote style="background-color: #f4f4f4; border-left: 4px solid #003366; padding: 1.5rem; margin: 2rem 0;">
-        <p style="margin-bottom: 1rem;">Looking for more database performance optimization tips?</p>
-        <ul style="list-style: none; padding: 0;">
     
-            <li style="margin-bottom: 0.5rem;">
-                <a href="../index.html" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Best Supabase Performance Tool</a>
-            </li>
-        
-            <li style="margin-bottom: 0.5rem;">
-                <a href="{{HOME_PATH}}" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Database surgery tool</a>
-            </li>
-        
-            <li style="margin-bottom: 0.5rem;">
-                <a href="{{HOME_PATH}}" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Postgres query optimizer</a>
-            </li>
-        
-        </ul>
-    </blockquote>
     </section>
                 
                 <section>
@@ -336,14 +319,14 @@
                 <p>In Berlin (Europe), An e-commerce platform in Berlin encountered database performance bottlenecks when expanding to the European market. By optimizing connection pool configuration, they successfully handled Black Friday traffic spikes. This shows that geographic location has a significant impact on database connection performance, especially when handling cross-region requests.</p>
                 <p>The average latency in this region is 72ms, and by optimizing supabase pgvector vs pinecone cost and performance, you can further reduce latency and improve user experience.</p>
                 
-                <!-- 90% 位置?CTA -->
+                <!-- 90% Position CTA -->
                 <div style="background-color: #f4f4f4; padding: 1rem; margin: 1rem 0;">
                     <a href="../index.html" style="display: inline-block; background-color: #003366; color: white; padding: 1rem 2rem; text-decoration: none; font-weight: bold;">Try Free SQL Diagnosis</a>
                 </div>
             </section>
         </article>
         
-        <!-- 多语言代码审计片段 -->
+        <!-- Multi-language Code Audit Snippets -->
         <section class="input-container">
             <h2>Multi-language Code Audit Snippets</h2>
             <div id="codeSnippets">
@@ -377,25 +360,25 @@ async function getUserWithOrders(userId) {
     WHERE u.id = $1
   ', [userId]);
   
-  // 处理结果
+  // Process Result
   const user = { ...result.rows[0] };
   user.orders = result.rows.map(row => ({ id: row.order_id, amount: row.amount }));
   return user;
 }
             </pre>
         
-            <h3>Python/SQLAlchemy: 性能优化</h3>
+            <h3>Python/SQLAlchemy: Performance Optimization</h3>
             <pre style="background-color: #f4f4f4; padding: 1rem; overflow-x: auto; border: 4px solid #003366;">
 from sqlalchemy import select, func
 from models import User, Order
 
-# 优化前：N+1 查询
+# Before Optimization: N+1 Query
 users = session.execute(select(User)).scalars().all()
 for user in users:
     orders = session.execute(select(Order).where(Order.user_id == user.id)).scalars().all()
     user.orders = orders
 
-# 优化后：使用预加?from sqlalchemy.orm import joinedload
+# After Optimization: Using Eager Loadingfrom sqlalchemy.orm import joinedload
 users = session.execute(
     select(User).options(joinedload(User.orders))
 ).scalars().all()
@@ -488,7 +471,44 @@ users = session.execute(
         
         
         <!-- Footer -->
-        <footer>
+        
+    <div style="margin: 2rem 0; padding: 1.5rem; background-color: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <h3 style="margin-top: 0; color: #1e293b; font-size: 1.125rem; font-weight: 600;">Recommended Resources</h3>
+        <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+    
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-connection-pool-sizing-serverless.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    The Golden Rule for Connection Pool Sizing in Serverless Environments
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="prisma-skip-engine-cold-start-nextjs.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Prisma Cold Start Hack: Using Data Proxy or Accelerated Workers
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-audit-log-table-performance-fix.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Audit Logs Growing Too Fast? Fix Your Postgres Logging Performance
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-explain-analyze-for-beginners-supabase.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Stop Guessing: A Surgeon's Guide to EXPLAIN ANALYZE in Supabase
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-fix-slow-join-on-uuid-columns.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    UUID Joins are Slow? Surgical Indexing for Modern Postgres Tables
+                </a>
+            </li>
+        
+        </ul>
+    </div>
+    <footer>
         </footer>
     </div>
     

@@ -272,24 +272,7 @@
                         </div>
                     
                 
-    <blockquote style="background-color: #f4f4f4; border-left: 4px solid #003366; padding: 1.5rem; margin: 2rem 0;">
-        <p style="margin-bottom: 1rem;">Looking for more database performance optimization tips?</p>
-        <ul style="list-style: none; padding: 0;">
     
-            <li style="margin-bottom: 0.5rem;">
-                <a href="../index.html" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Audit your SQL now</a>
-            </li>
-        
-            <li style="margin-bottom: 0.5rem;">
-                <a href="{{HOME_PATH}}" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Database surgery tool</a>
-            </li>
-        
-            <li style="margin-bottom: 0.5rem;">
-                <a href="{{HOME_PATH}}" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Try the Automated Postgres Surgeon</a>
-            </li>
-        
-        </ul>
-    </blockquote>
     </section>
                 
                 <section>
@@ -316,14 +299,14 @@
                 <p>In San Francisco (US West), A SaaS company in San Francisco encountered connection pool exhaustion issues when using Supabase. By switching to transaction mode connection pool, their response time decreased from 500ms to 45ms. This shows that geographic location has a significant impact on database connection performance, especially when handling cross-region requests.</p>
                 <p>The average latency in this region is 12ms, and by optimizing postgres gin index bloat pg_trgm, you can further reduce latency and improve user experience.</p>
                 
-                <!-- 90% 位置?CTA -->
+                <!-- 90% Position CTA -->
                 <div style="background-color: #f4f4f4; padding: 1rem; margin: 1rem 0;">
                     <a href="../index.html" style="display: inline-block; background-color: #003366; color: white; padding: 1rem 2rem; text-decoration: none; font-weight: bold;">Try Free SQL Diagnosis</a>
                 </div>
             </section>
         </article>
         
-        <!-- 多语言代码审计片段 -->
+        <!-- Multi-language Code Audit Snippets -->
         <section class="input-container">
             <h2>Multi-language Code Audit Snippets</h2>
             <div id="codeSnippets">
@@ -462,7 +445,44 @@ class User(Base):
         
         
         <!-- Footer -->
-        <footer>
+        
+    <div style="margin: 2rem 0; padding: 1.5rem; background-color: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <h3 style="margin-top: 0; color: #1e293b; font-size: 1.125rem; font-weight: 600;">Recommended Resources</h3>
+        <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+    
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-surgical-check-for-table-lock.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Who's Locking the Table? Find and Terminate Postgres Locks
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="how-to-find-unused-indexes-in-postgres-supabase.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Stop Wasting RAM: Find and Delete Unused Postgres Indexes
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="nextjs-database-cold-start-latency-supabase-fix.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Kill Cold Starts: How to Optimize Postgres Connections in Next.js Serverless
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="postgres-select-count-slow-supabase-fix.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    100ms to 1ms: Fast Counting in Postgres Without Table Scans
+                </a>
+            </li>
+        
+            <li style="margin-bottom: 0.75rem;">
+                <a href="supabase-auto-generated-api-slow-performance.html" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s;">
+                    Is the Supabase API Slow? Auditing PostgREST Overhead
+                </a>
+            </li>
+        
+        </ul>
+    </div>
+    <footer>
         </footer>
     </div>
     
@@ -484,7 +504,7 @@ class User(Base):
         
         // Calculator Logic
         
-            // 性能优化效果Calculator Logic
+            // Performance Optimization效果Calculator Logic
             function calculatePerformanceImprovement() {
                 const currentTime = parseInt(document.getElementById('currentTime').value) || 0;
                 
